@@ -187,7 +187,7 @@
         </div>
         ${answerDetail}
         <a href="explanation.html?chapter=${q.category}&id=${q.id}" class="review-explain-btn">
-          📖 Lihat Penjelasan
+          Lihat Penjelasan
         </a>
       `;
 
