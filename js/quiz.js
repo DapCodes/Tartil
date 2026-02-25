@@ -52,24 +52,67 @@
     localStorage.removeItem('tartil_time');
     localStorage.removeItem('tartil_date');
 
+    // Check for selected chapters from localStorage
+    const savedChapters = localStorage.getItem('tartil_selected_chapters');
+    let selectedChapters = [];
+    if (savedChapters) {
+      try {
+        selectedChapters = JSON.parse(savedChapters);
+      } catch (e) {
+        console.error("Error parsing selected chapters", e);
+      }
+    }
+
     // Check for chapter filter from URL
     const urlParams = new URLSearchParams(window.location.search);
     currentChapter = urlParams.get('chapter');
 
-    // Filter questions by chapter, or use all
+    // Determine active questions
     if (currentChapter) {
+      // Coming from explanation page for specific chapter
       activeQuestions = questions.filter(q => q.category === currentChapter);
-      // If no questions found for this chapter, fall back to all
       if (activeQuestions.length === 0) {
         activeQuestions = questions.slice();
         currentChapter = null;
       }
-    } else {
-      activeQuestions = questions.slice();
-    }
+      activeQuestions = shuffleArray(activeQuestions);
+    } else if (selectedChapters.length > 0) {
+      // Coming from material selection page
+      const chapterQuestionsMap = {};
+      selectedChapters.forEach(chId => {
+        // Collect, filter and shuffle per chapter
+        chapterQuestionsMap[chId] = shuffleArray(questions.filter(q => q.category === chId));
+      });
 
-    // Shuffle question order
-    activeQuestions = shuffleArray(activeQuestions);
+      // Proportional sampling: take 1 question per chapter in round-robin until limit
+      const totalQuestionsLimit = 20;
+      let activeQuestionsPool = [];
+      let addedInRound = 0;
+      
+      do {
+        addedInRound = 0;
+        for (let i = 0; i < selectedChapters.length; i++) {
+          if (activeQuestionsPool.length >= totalQuestionsLimit) break;
+          
+          const chId = selectedChapters[i];
+          const chQuestions = chapterQuestionsMap[chId];
+          
+          if (chQuestions && chQuestions.length > 0) {
+            activeQuestionsPool.push(chQuestions.shift());
+            addedInRound++;
+          }
+        }
+      } while (addedInRound > 0 && activeQuestionsPool.length < totalQuestionsLimit);
+
+      activeQuestions = shuffleArray(activeQuestionsPool);
+      
+      // Cleanup localStorage
+      localStorage.removeItem('tartil_selected_chapters');
+    } else {
+      // Fallback: Use all questions
+      activeQuestions = questions.slice();
+      activeQuestions = shuffleArray(activeQuestions);
+    }
 
     // Prepare shuffled options for each question
     shuffledOptionsMap = activeQuestions.map(q => {
