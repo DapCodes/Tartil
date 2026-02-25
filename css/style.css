@@ -161,6 +161,19 @@ body::after {
   height: 100%;
 }
 
+.navbar-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  transition: height var(--transition);
+}
+
+@media (max-width: 480px) {
+  .navbar-logo {
+    height: 32px;
+  }
+}
+
 .logo-text {
   font-size: 1.5rem;
   font-weight: 800;
