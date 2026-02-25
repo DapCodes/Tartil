@@ -42,75 +42,68 @@
     const seconds = totalSeconds % 60;
     const timeFormatted = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
-    // ═══ Compute stats (Recalculate to be safe) ═══
+    // ═══ Compute stats ═══
     let correctCount = 0;
     for (let i = 0; i < total; i++) {
-      if (userAnswers[i] !== null && sessionQuestions[i] && userAnswers[i] === sessionQuestions[i].answer) {
-        correctCount++;
-      }
+        if (userAnswers[i] !== null && sessionQuestions[i] && userAnswers[i] === sessionQuestions[i].answer) {
+            correctCount++;
+        }
     }
     const wrongCount = total - correctCount;
-    const percentage = Math.round((correctCount / total) * 100);
+    const percentage = total > 0 ? Math.round((correctCount / total) * 100) : 0;
 
-    // ═══ Update Header ═══
-    document.getElementById('totalTime').textContent = timeFormatted;
-    document.getElementById('quizDate').textContent = dateStr || '-';
+    // ═══ Update Header Safely ═══
+    const totalTimeEl = document.getElementById('totalTime');
+    if (totalTimeEl) totalTimeEl.textContent = timeFormatted;
+
+    const quizDateEl = document.getElementById('quizDate');
+    if (quizDateEl) quizDateEl.textContent = dateStr || '-';
     
-    // Update score total label (e.g., "dari 3" instead of "dari 15")
     const scoreLabel = document.querySelector('.score-label');
-    if (scoreLabel) {
-      scoreLabel.textContent = `dari ${total}`;
-    }
+    if (scoreLabel) scoreLabel.textContent = `dari ${total}`;
 
-    // ═══ Grade / Greeting ═══
+    // ═══ Grade / Greeting Safely ═══
     const emojiEl = document.getElementById('resultEmoji');
     const greetingEl = document.getElementById('resultGreeting');
     const subtitleEl = document.getElementById('resultSubtitle');
 
-    if (percentage >= 90) {
-      emojiEl.textContent = '';
-      greetingEl.textContent = 'Luar Biasa!';
-      subtitleEl.textContent = 'Kamu Hafidz Tajwid!';
-    } else if (percentage >= 70) {
-      emojiEl.textContent = '';
-      greetingEl.textContent = 'Bagus Sekali!';
-      subtitleEl.textContent = 'Terus Belajar!';
-    } else if (percentage >= 40) {
-      emojiEl.textContent = '';
-      greetingEl.textContent = 'Cukup Baik';
-      subtitleEl.textContent = 'Perlu Latihan Lagi';
-    } else {
-      emojiEl.textContent = '';
-      greetingEl.textContent = 'Semangat!';
-      subtitleEl.textContent = 'Pelajari Kembali Materinya';
+    if (emojiEl) emojiEl.textContent = ''; // UI Cleanup (no more emojis)
+
+    if (greetingEl) {
+        if (percentage >= 90) greetingEl.textContent = 'Luar Biasa!';
+        else if (percentage >= 70) greetingEl.textContent = 'Bagus Sekali!';
+        else if (percentage >= 40) greetingEl.textContent = 'Cukup Baik';
+        else greetingEl.textContent = 'Semangat!';
+    }
+
+    if (subtitleEl) {
+        if (percentage >= 90) subtitleEl.textContent = 'Kamu Hafidz Tajwid!';
+        else if (percentage >= 70) subtitleEl.textContent = 'Terus Belajar!';
+        else if (percentage >= 40) subtitleEl.textContent = 'Perlu Latihan Lagi';
+        else subtitleEl.textContent = 'Pelajari Kembali Materinya';
     }
 
     // ═══ Animated Score Ring ═══
     const ringFill = document.getElementById('scoreRingFill');
-    const circumference = 2 * Math.PI * 65; // r=65
+    if (ringFill) {
+        const circumference = 2 * Math.PI * 65; // r=65
+        ringFill.classList.remove('gold', 'green', 'red');
+        if (percentage >= 90) ringFill.classList.add('gold');
+        else if (percentage >= 50) ringFill.classList.add('green');
+        else ringFill.classList.add('red');
 
-    // Choose color
-    ringFill.classList.remove('gold', 'green', 'red');
-    if (percentage >= 90) {
-      ringFill.classList.add('gold');
-    } else if (percentage >= 50) {
-      ringFill.classList.add('green');
-    } else {
-      ringFill.classList.add('red');
+        const offset = circumference - (percentage / 100) * circumference;
+        ringFill.style.strokeDasharray = circumference;
+        ringFill.style.strokeDashoffset = circumference;
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                ringFill.style.strokeDashoffset = offset;
+            });
+        });
     }
 
-    const offset = circumference - (percentage / 100) * circumference;
-    ringFill.style.strokeDasharray = circumference;
-    ringFill.style.strokeDashoffset = circumference;
-
-    // Trigger animation
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        ringFill.style.strokeDashoffset = offset;
-      });
-    });
-
-    // ═══ Animate Numbers ═══
+    // ═══ Animate Numbers Safely ═══
     animateNumber(document.getElementById('scoreNum'), 0, correctCount, 1200);
     animateNumber(document.getElementById('correctCount'), 0, correctCount, 1000);
     animateNumber(document.getElementById('wrongCount'), 0, wrongCount, 1000);
