@@ -12,101 +12,232 @@ const chapters = [
     id: "nun_sukun",
     title: "Nun Sukun & Tanwin",
     description: "Hukum yang terjadi apabila Nun Sukun (نْ) atau Tanwin (ً ٍ ٌ) bertemu dengan huruf-huruf tertentu.",
+    longDescription: "Hukum Nun Sukun dan Tanwin adalah salah satu dasar terpenting dalam ilmu Tajwid. Hukum ini mengatur bagaimana cara kita mengucapkan bunyi 'n' (baik dari nun mati maupun tanwin) ketika bertemu dengan salah satu dari 28 huruf hijaiyah. Terdapat lima pembagian utama: Izhar (jelas), Idgham Bighunnah (masuk dengan dengung), Idgham Bilaghunnah (masuk tanpa dengung), Iqlab (menjadi bunyi mim), dan Ikhfa (samar).",
     materi: [
       "1. **Izhar Halqi**: Membaca Nun/Tanwin dengan jelas tanpa dengung. Hurufnya: ء ه ع ح غ خ.",
       "2. **Idgham Bighunnah**: Memasukkan Nun/Tanwin ke huruf berikutnya disertai dengung. Hurufnya: ي ن م و.",
       "3. **Idgham Bilaghunnah**: Memasukkan Nun/Tanwin ke huruf berikutnya tanpa dengung. Hurufnya: ل ر.",
       "4. **Iqlab**: Mengubah bunyi Nun/Tanwin menjadi bunyi Mim (م) saat bertemu Ba (ب).",
       "5. **Ikhfa Haqiqi**: Menyamarkan bunyi Nun/Tanwin disertai dengung. Hurufnya: ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك."
+    ],
+    examples: [
+      {
+        title: "Izhar Halqi (ء ه ع ح غ خ)",
+        arabic: "مِنْ عِلْمٍ",
+        highlight: "نْ ع",
+        explanation: "Nun mati bertemu 'Ain (ع). Dibaca jelas tanpa mendengung."
+      },
+      {
+        title: "Idgham Bighunnah (ي ن م و)",
+        arabic: "مَن يَعْمَلْ",
+        highlight: "ن ي",
+        explanation: "Nun mati bertemu Ya (ي). Suara nun masuk ke Ya disertai dengung 2 harakat."
+      },
+      {
+        title: "Idgham Bilaghunnah (ل ر)",
+        arabic: "مِن رَّبِّهِمْ",
+        highlight: "ن ر",
+        explanation: "Nun mati bertemu Ra (ر). Suara nun masuk ke Ra tanpa dengung."
+      },
+      {
+        title: "Iqlab (ب)",
+        arabic: "مِنۢ بَعْدِ",
+        highlight: "نۢ ب",
+        explanation: "Nun mati bertemu Ba (ب). Bunyi nun berubah menjadi mim disertai dengung."
+      },
+      {
+        title: "Ikhfa Haqiqi",
+        arabic: "مُنذِرٌ",
+        highlight: "نذ",
+        explanation: "Nun mati bertemu Dzal (ذ). Bunyi nun dibaca samar disertai dengung."
+      }
     ]
   },
   {
     id: "mim_sukun",
     title: "Mim Sukun",
     description: "Hukum yang terjadi apabila Mim Sukun (مْ) bertemu dengan huruf hijaiyah.",
+    longDescription: "Hukum Mim Sukun mengatur cara pengucapan huruf Mim yang mati (sukun) saat bertemu dengan huruf hijaiyah lainnya. Berbeda dengan Nun Sukun, Mim Sukun hanya memiliki tiga hukum: Ikhfa Syafawi (ketemu Ba), Idgham Mimi (ketemu Mim), dan Izhar Syafawi (ketemu huruf lainnya).",
     materi: [
       "1. **Izhar Syafawi**: Mim sukun bertemu huruf selain Mim dan Ba, dibaca jelas.",
       "2. **Ikhfa Syafawi**: Mim sukun bertemu Ba (ب), dibaca samar dengan dengung.",
       "3. **Idgham Mimi (Mutamatsilain)**: Mim sukun bertemu Mim, dimasukkan dengan dengung."
+    ],
+    examples: [
+      {
+        title: "Izhar Syafawi",
+        arabic: "لَهُمْ فِيهَا",
+        highlight: "مْ ف",
+        explanation: "Mim mati bertemu Fa (ف). Dibaca jelas tanpa dengung."
+      },
+      {
+        title: "Ikhfa Syafawi",
+        arabic: "تَرْمِيهِم بِحِجَارَةٍ",
+        highlight: "مْ ب",
+        explanation: "Mim mati bertemu Ba (ب). Dibaca samar dengan dengung di bibir."
+      },
+      {
+        title: "Idgham Mimi",
+        arabic: "لَكُم مَّا كَسَبْتُمْ",
+        highlight: "مْ م",
+        explanation: "Mim mati bertemu Mim (م). Mim pertama masuk ke Mim kedua dengan dengung."
+      }
     ]
   },
   {
     id: "mad",
     title: "Mad (Panjang Pendek)",
     description: "Memanjangkan bunyi huruf karena adanya huruf Mad (ا و ي).",
+    longDescription: "Mad secara bahasa berarti memanjangkan. Dalam tajwid, Mad adalah memanjangkan suara saat mengucapkan huruf-huruf Mad (Alif, Waw, Ya). Mad dibagi menjadi dua besar: Mad Thabi'i (Asli) dan Mad Far'i (Cabang). Menguasai Mad sangat penting agar tidak salah dalam mengubah arti kata dalam Al-Qur'an.",
     materi: [
       "**Mad Thabi'i (Asli)**: Panjang 2 harakat. Dasar semua mad.",
       "**Mad Wajib Muttasil**: Mad bertemu hamzah dalam satu kata, 4–5 harakat.",
       "**Mad Jaiz Munfasil**: Mad bertemu hamzah di lain kata, 2–5 harakat.",
       "**Mad 'Aridh Lissukun**: Mad di akhir kata saat waqaf, 2–6 harakat.",
-      "**Mad Iwad**: Tanwin fathah di akhir kata saat waqaf dibaca 2 harakat.",
-      "**Mad Badal**: Hamzah diikuti mad, panjang 2 harakat.",
-      "**Mad Lin**: Waw/Ya sukun setelah fathah, dibaca memanjang saat waqaf.",
-      "**Mad Lazim Kalimi Mutsaqqal**: Mad bertemu tasydid dalam satu kata, 6 harakat.",
-      "**Mad Lazim Kalimi Mukhaffaf**: Mad bertemu sukun asli dalam satu kata, 6 harakat.",
-      "**Mad Lazim Harfi Mutsaqqal**: Pada huruf pembuka surah (fawatih), ada idgham, 6 harakat.",
-      "**Mad Lazim Harfi Mukhaffaf**: Pada huruf pembuka surah, tanpa idgham, 6 harakat.",
-      "**Mad Silah Qashirah**: Ha dhamir bertemu huruf selain hamzah, 2 harakat.",
-      "**Mad Silah Thawilah**: Ha dhamir bertemu hamzah, 4–5 harakat.",
-      "**Mad Tamkin**: Ya bertasydid bertemu Ya sukun, 2 harakat.",
-      "**Mad Farqi**: Untuk membedakan antara kalimat tanya dan bukan, 6 harakat."
-    ]
-  },
-  {
-    id: "qalqalah",
-    title: "Qalqalah",
-    description: "Memantulkan bunyi huruf Qalqalah (ق ط ب ج د) yang berharakat sukun atau waqaf.",
-    materi: [
-      "1. **Qalqalah Sughra**: Pantulan ringan pada huruf qalqalah yang mati di tengah kata.",
-      "2. **Qalqalah Kubra**: Pantulan kuat pada huruf qalqalah di akhir kata karena waqaf."
-    ]
-  },
-  {
-    id: "ghunnah",
-    title: "Ghunnah",
-    description: "Dengung yang keluar dari pangkal hidung (Al-Khaisyum) dengan panjang 2 harakat.",
-    materi: [
-      "1. **Ghunnah Musyaddadah**: Pada Nun Tasydid (نّ) dan Mim Tasydid (مّ), wajib dengung.",
-      "2. **Ghunnah pada Idgham Bighunnah**: Nun sukun/tanwin masuk huruf ي ن م و disertai dengung.",
-      "3. **Ghunnah pada Ikhfa**: Nun sukun/tanwin bertemu huruf ikhfa, dengung samar.",
-      "4. **Ghunnah pada Iqlab**: Nun berubah jadi Mim saat bertemu Ba, ada dengung."
-    ]
-  },
-  {
-    id: "lam_tarif",
-    title: "Lam Ta'rif (Alif Lam)",
-    description: "Hukum Alif Lam (ال) di awal kata.",
-    materi: [
-      "1. **Lam Qamariyah**: Alif Lam bertemu 14 huruf qamariyah, dibaca jelas. Huruf: ا ب ج ح خ ع غ ف ق ك م و ه ي.",
-      "2. **Lam Syamsiyah**: Alif Lam bertemu 14 huruf syamsiyah, Lam masuk ke huruf berikutnya. Huruf: ت ث د ذ ر ز س ش ص ض ط ظ ل ن."
+      "**Mad Iwad**: Tanwin fathah di akhir kata saat waqaf dibaca 2 harakat."
+    ],
+    examples: [
+      {
+        title: "Mad Thabi'i",
+        arabic: "قَالَ",
+        highlight: "قَا",
+        explanation: "Alif didahului harakat fathah. Dibaca panjang 2 harakat."
+      },
+      {
+        title: "Mad Wajib Muttasil",
+        arabic: "جَاءَ",
+        highlight: "اءَ",
+        explanation: "Mad bertemu hamzah dalam satu kata. Panjang 4-5 harakat."
+      },
+      {
+        title: "Mad Jaiz Munfasil",
+        arabic: "يَا أَيُّهَا",
+        highlight: "يَا أَ",
+        explanation: "Mad bertemu hamzah di kata yang berbeda. Panjang 2-5 harakat."
+      }
     ]
   },
   {
     id: "ra",
     title: "Ra Tafkhim & Tarqiq",
     description: "Hukum menebalkan atau menipiskan bunyi huruf Ra (ر).",
+    longDescription: "Hukum Ra mengatur kapan huruf Ra (ر) harus dibaca tebal (Tafkhim) atau tipis (Tarqiq). Ini sangat bergantung pada harakat huruf Ra itu sendiri atau harakat huruf sebelumnya. Membedakan ketebalan Ra memberikan keindahan dan ketepatan dalam pelafalan Al-Qur'an.",
     materi: [
-      "1. **Ra Tafkhim (Tebal)**: Ra berharakat fathah atau dhammah.",
-      "2. **Ra Tarqiq (Tipis)**: Ra berharakat kasrah atau setelah kasrah asli.",
-      "3. **Ra Tafkhim karena Fathah/Dhammah**: Termasuk ra sukun setelah fathah/dhammah.",
-      "4. **Ra Tarqiq karena Kasrah**: Termasuk ra sukun setelah kasrah asli.",
-      "5. **Ra Jaiz (Boleh Tebal atau Tipis)**: Ra sukun didahului kasrah, setelahnya huruf isti'la."
+      "1. **Ra Tafkhim (Tebal)**: Ra berharakat fathah atau dhammah (رَ, رُ) atau Ra sukun didahului fathah/dhammah.",
+      "2. **Ra Tarqiq (Tipis)**: Ra berharakat kasrah (رِ) atau Ra sukun didahului kasrah asli.",
+      "3. **Ra Jaiz**: Boleh tebal atau tipis dalam kondisi tertentu (Ra sukun didahului kasrah, setelahnya huruf Isti'la)."
+    ],
+    examples: [
+      {
+        title: "Ra Tafkhim (Tebal)",
+        arabic: "رَسُولُ اللَّهِ - رُزِقُوا",
+        highlight: "رَ",
+        explanation: "Huruf Ra berharakat fathah atau dhammah wajib dibaca tebal."
+      },
+      {
+        title: "Ra Tarqiq (Tipis)",
+        arabic: "رِزْقًا - فِرْعَوْنَ",
+        highlight: "رِ",
+        explanation: "Huruf Ra berharakat kasrah atau Ra mati didahului kasrah dibaca tipis."
+      }
     ]
   },
   {
     id: "gharib",
     title: "Ayat-Ayat Gharib",
     description: "Bacaan-bacaan khusus yang tidak umum atau berbeda dari kaidah standar.",
+    longDescription: "Gharib berarti asing atau jarang. Dalam Al-Qur'an riwayat Hafs dari Ashim, terdapat beberapa kata yang cara membacanya keluar dari kaidah umum (pengecualian), seperti Saktah (berhenti tanpa napas), Imalah (bunyi 'e' seperti sate), dan Isymam.",
     materi: [
-      "1. **Isymam**: Mencucukan bibir (isyarat dhammah) pada huruf yang disukunkan, tanpa suara.",
-      "2. **Imalah**: Memiringkan bunyi fathah ke arah kasrah (antara 'a' dan 'e').",
-      "3. **Saktah**: Berhenti sejenak (2 harakat) tanpa mengambil nafas.",
-      "4. **Tashil**: Membaca hamzah kedua dengan samar antara hamzah dan alif.",
-      "5. **Naql**: Memindahkan harakat hamzah ke huruf sukun sebelumnya.",
-      "6. **Mad dan Qashr pada kata tertentu**: Memanjangkan atau memendekkan bacaan pada kata-kata khusus.",
-      "7. **Bacaan khilafiyah riwayat**: Perbedaan bacaan antar riwayat (mis. Hafs, Warsy, dll).",
-      "8. **Waqaf Gharib**: Berhenti pada tempat yang tidak biasa, dengan ketentuan khusus.",
-      "9. **Bacaan lafadz tertentu**: Kata-kata Al-Qur'an yang cara bacanya tidak mengikuti kaidah umum."
+      "1. **Imalah**: Memiringkan bunyi fathah ke arah kasrah (hanya pada 'Majreha' di QS Hud: 41).",
+      "2. **Isymam**: Isyarat mencucu bibir tanpa suara pada kata 'Laa Ta'mannaa'.",
+      "3. **Saktah**: Berhenti sejenak (2 harakat) tanpa mengambil napas.",
+      "4. **Tashil**: Membaca hamzah kedua dengan samar (antara hamzah dan alif)."
+    ],
+    examples: [
+      {
+        title: "Imalah",
+        arabic: "بِسْمِ اللَّهِ مَجْر۪ىٰهَا",
+        highlight: "جْر۪ىٰ",
+        explanation: "Satu-satunya bacaan Imalah: harakat fathah miring ke kasrah (bunyi 're')."
+      },
+      {
+        title: "Saktah",
+        arabic: "كَلَّا ۖ بَلْ ۜ رَانَ",
+        highlight: "بَلْ ۜ ر",
+        explanation: "Berhenti sejenak tanpa mengambil napas antara kata 'Bal' dan 'Raana'."
+      }
+    ]
+  },
+  {
+    id: "qalqalah",
+    title: "Qalqalah",
+    description: "Memantulkan bunyi huruf Qalqalah (ق ط ب ج d) yang berharakat sukun atau waqaf.",
+    longDescription: "Qalqalah berarti getaran atau pantulan. Dalam tajwid, hukum ini berlaku ketika salah satu dari 5 huruf (Ba, Jim, Dal, Tha, Qaf - disingkat 'Baju Di Toko') berharakat sukun atau mati karena berhenti di akhir ayat. Ada dua jenis utama: Sughra (kecil/di tengah) dan Kubra (besar/di akhir).",
+    materi: [
+      "1. **Qalqalah Sughra**: Pantulan ringan pada huruf qalqalah yang mati di tengah kata.",
+      "2. **Qalqalah Kubra**: Pantulan kuat pada huruf qalqalah di akhir kata karena waqaf."
+    ],
+    examples: [
+      {
+        title: "Qalqalah Sughra",
+        arabic: "يَدْخُلُونَ",
+        highlight: "دْ",
+        explanation: "Huruf Dal mati di tengah kata. Dipantulkan dengan ringan."
+      },
+      {
+        title: "Qalqalah Kubra",
+        arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ",
+        highlight: "دٌ",
+        explanation: "Huruf Dal di akhir ayat (waqaf). Dipantulkan dengan kuat."
+      }
+    ]
+  },
+  {
+    id: "ghunnah",
+    title: "Ghunnah",
+    description: "Dengung yang keluar dari pangkal hidung (Al-Khaisyum) dengan panjang 2 harakat.",
+    longDescription: "Ghunnah adalah bunyi dengung yang berasal dari rongga hidung. Hukum ini wajib dibaca ketika kita menemukan huruf Nun atau Mim yang memiliki tanda Tasydid (tasydid). Panjang dengungnya adalah 2 harakat/ketukan.",
+    materi: [
+      "1. **Ghunnah Musyaddadah**: Pada Nun Tasydid (نّ) dan Mim Tasydid (مّ), wajib dengung.",
+      "2. **Ghunnah pada Idgham Bighunnah**: Nun sukun/tanwin masuk huruf ي ن m و disertai dengung."
+    ],
+    examples: [
+      {
+        title: "Ghunnah (Nun Tasydid)",
+        arabic: "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+        highlight: "إِنَّ",
+        explanation: "Nun bertasydid dibaca mendengung jelas selama 2 harakat."
+      },
+      {
+        title: "Ghunnah (Mim Tasydid)",
+        arabic: "ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ",
+        highlight: "ثُمَّ",
+        explanation: "Mim bertasydid dibaca mendengung jelas selama 2 harakat."
+      }
+    ]
+  },
+  {
+    id: "lam_tarif",
+    title: "Lam Ta'rif (Alif Lam)",
+    description: "Hukum Alif Lam (ال) di awal kata.",
+    longDescription: "Lam Ta'rif adalah huruf Alif dan Lam yang masuk pada kata benda (Isim). Terbagi menjadi Al-Qamariyah (Lam dibaca jelas) dan Al-Syamsiyah (Lam melebur ke huruf berikutnya).",
+    materi: [
+      "1. **Lam Qamariyah**: Alif Lam bertemu huruf qamariyah, dibaca jelas. Huruf: ا ب ج ح خ ع غ ف ق ك م व ه ي.",
+      "2. **Lam Syamsiyah**: Alif Lam bertemu huruf syamsiyah, Lam masuk ke huruf berikutnya. Huruf: ت ث d ذ ر ز س ش ص ض ط ظ ل ن."
+    ],
+    examples: [
+      {
+        title: "Al-Qamariyah",
+        arabic: "الْحَمْدُ لِلَّهِ",
+        highlight: "الْحَ",
+        explanation: "Huruf Lam dibaca jelas (Sukun) karena bertemu huruf Ha."
+      },
+      {
+        title: "Al-Syamsiyah",
+        arabic: "الشَّمْسُ",
+        highlight: "الشَّ",
+        explanation: "Huruf Lam melebur ke huruf Syin yang bertasydid."
+      }
     ]
   }
 ];

@@ -113,24 +113,23 @@
       `;
     }
 
-    // Build example questions preview
+    // Build example cards HTML
     let examplesHtml = '';
-    if (chapterQuestions.length > 0) {
-      const previewQuestions = chapterQuestions.slice(0, 3);
+    if (chapter.examples && chapter.examples.length > 0) {
       examplesHtml = `
         <div class="exp-section">
           <div class="exp-section-label">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
             </svg>
-            Contoh Bacaan
+            Contoh & Penjelasan Lengkap
           </div>
           <div class="exp-examples-grid">
-            ${previewQuestions.map(q => `
+            ${chapter.examples.map(ex => `
               <div class="exp-example-card">
-                ${q.arabic ? `<div class="exp-example-arabic" dir="rtl">${buildHighlightedArabic(q.explanation.example, q.explanation.highlight)}</div>` : ''}
-                <div class="exp-example-title">${q.explanation.title}</div>
-                <div class="exp-example-desc">${q.explanation.text}</div>
+                <div class="exp-example-arabic" dir="rtl">${buildHighlightedArabic(ex.arabic, ex.highlight)}</div>
+                <div class="exp-example-title">${ex.title}</div>
+                <div class="exp-example-desc">${ex.explanation}</div>
               </div>
             `).join('')}
           </div>
@@ -146,7 +145,7 @@
     explanationContent.innerHTML = `
       <div class="exp-card">
         <!-- Chapter Badge -->
-        <div class="exp-type-badge">📖 Bab ${index + 1}</div>
+
 
         <!-- Title -->
         <h2 class="exp-rule-name">${chapter.title}</h2>
@@ -160,9 +159,9 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
             </svg>
-            Deskripsi
+            Pendahuluan
           </div>
-          <div class="exp-description">${chapter.description}</div>
+          <div class="exp-description">${chapter.longDescription || chapter.description}</div>
         </div>
 
         <!-- Materi Points -->
@@ -171,12 +170,12 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
             </svg>
-            Materi Pembahasan
+            Ringkasan Aturan
           </div>
           ${materiHtml}
         </div>
 
-        <!-- Example Questions Preview -->
+        <!-- Examples Section -->
         ${examplesHtml}
 
         <!-- Info Box -->

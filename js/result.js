@@ -68,19 +68,19 @@
     const subtitleEl = document.getElementById('resultSubtitle');
 
     if (percentage >= 90) {
-      emojiEl.textContent = '🌟';
+      emojiEl.textContent = '';
       greetingEl.textContent = 'Luar Biasa!';
       subtitleEl.textContent = 'Kamu Hafidz Tajwid!';
     } else if (percentage >= 70) {
-      emojiEl.textContent = '👍';
+      emojiEl.textContent = '';
       greetingEl.textContent = 'Bagus Sekali!';
       subtitleEl.textContent = 'Terus Belajar!';
     } else if (percentage >= 40) {
-      emojiEl.textContent = '📚';
+      emojiEl.textContent = '';
       greetingEl.textContent = 'Cukup Baik';
       subtitleEl.textContent = 'Perlu Latihan Lagi';
     } else {
-      emojiEl.textContent = '💪';
+      emojiEl.textContent = '';
       greetingEl.textContent = 'Semangat!';
       subtitleEl.textContent = 'Pelajari Kembali Materinya';
     }
@@ -190,7 +190,7 @@
         <div class="review-card-header">
           <div class="review-num">${i + 1}</div>
           <div class="review-question">${truncatedQ}</div>
-          <div class="review-status">${isCorrect ? '✅' : '❌'}</div>
+          <div class="review-status">${isCorrect ? 'Benar' : 'Salah'}</div>
         </div>
         ${answerDetail}
         <a href="explanation.html?chapter=${q.category}&id=${q.id}" class="review-explain-btn">

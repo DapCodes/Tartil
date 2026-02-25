@@ -211,9 +211,8 @@
     updateProgressBar();
 
     // Type badge
-    const typeIcon = q.type === 'ayat' ? '📖' : '📝';
     const typeLabel = q.type === 'ayat' ? 'Soal Ayat' : 'Soal Teori';
-    typeBadge.innerHTML = `${typeIcon} ${typeLabel}`;
+    typeBadge.textContent = typeLabel;
 
     // Arabic display
     if (q.arabic && q.arabic.trim() !== '') {
