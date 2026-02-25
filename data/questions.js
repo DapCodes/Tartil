@@ -171,7 +171,7 @@ const chapters = [
   {
     id: "qalqalah",
     title: "Qalqalah",
-    description: "Memantulkan bunyi huruf Qalqalah (ق ط ب ج d) yang berharakat sukun atau waqaf.",
+    description: "Memantulkan bunyi huruf Qalqalah (ق ط ب ج د) yang berharakat sukun atau waqaf.",
     longDescription: "Qalqalah berarti getaran atau pantulan. Dalam tajwid, hukum ini berlaku ketika salah satu dari 5 huruf (Ba, Jim, Dal, Tha, Qaf - disingkat 'Baju Di Toko') berharakat sukun atau mati karena berhenti di akhir ayat. Ada dua jenis utama: Sughra (kecil/di tengah) dan Kubra (besar/di akhir).",
     materi: [
       "1. **Qalqalah Sughra**: Pantulan ringan pada huruf qalqalah yang mati di tengah kata.",
@@ -199,7 +199,7 @@ const chapters = [
     longDescription: "Ghunnah adalah bunyi dengung yang berasal dari rongga hidung. Hukum ini wajib dibaca ketika kita menemukan huruf Nun atau Mim yang memiliki tanda Tasydid (tasydid). Panjang dengungnya adalah 2 harakat/ketukan.",
     materi: [
       "1. **Ghunnah Musyaddadah**: Pada Nun Tasydid (نّ) dan Mim Tasydid (مّ), wajib dengung.",
-      "2. **Ghunnah pada Idgham Bighunnah**: Nun sukun/tanwin masuk huruf ي ن m و disertai dengung."
+      "2. **Ghunnah pada Idgham Bighunnah**: Nun sukun/tanwin masuk huruf ي ن م و disertai dengung."
     ],
     examples: [
       {
@@ -222,8 +222,8 @@ const chapters = [
     description: "Hukum Alif Lam (ال) di awal kata.",
     longDescription: "Lam Ta'rif adalah huruf Alif dan Lam yang masuk pada kata benda (Isim). Terbagi menjadi Al-Qamariyah (Lam dibaca jelas) dan Al-Syamsiyah (Lam melebur ke huruf berikutnya).",
     materi: [
-      "1. **Lam Qamariyah**: Alif Lam bertemu huruf qamariyah, dibaca jelas. Huruf: ا ب ج ح خ ع غ ف ق ك م व ه ي.",
-      "2. **Lam Syamsiyah**: Alif Lam bertemu huruf syamsiyah, Lam masuk ke huruf berikutnya. Huruf: ت ث d ذ ر ز س ش ص ض ط ظ ل ن."
+      "1. **Lam Qamariyah**: Alif Lam bertemu huruf qamariyah, dibaca jelas. Huruf: ا ب ج ح خ ع غ ف ق ك م و ه ي.",
+      "2. **Lam Syamsiyah**: Alif Lam bertemu huruf syamsiyah, Lam masuk ke huruf berikutnya. Huruf: ت ث د ذ ر ز س ش ص ض ط ظ ل ن."
     ],
     examples: [
       {
@@ -270,7 +270,7 @@ const questions = [
     type: "ayat",
     category: "nun_sukun",
     subtopic: "izhar_halqi",
-    question: "Tanwin (ٍ) bertemu huruf Ha (ح) pada lafaz berikut. Apa hukumnya?",
+    question: "Tanwin (ٌ) bertemu huruf Ha (ح) pada lafaz berikut. Apa hukumnya?",
     arabic: "عَلِيمٌ حَكِيمٌ",
     options: ["Idgham Bighunnah", "Ikhfa Haqiqi", "Izhar Halqi", "Idgham Bilaghunnah"],
     answer: 2,
@@ -404,7 +404,7 @@ const questions = [
     type: "ayat",
     category: "nun_sukun",
     subtopic: "iqlab",
-    question: "Tanwin kasrah bertemu Ba (ب) pada potongan ayat ini. Apa hukumnya?",
+    question: "Tanwin dhammah bertemu Ba (ب) pada potongan ayat ini. Apa hukumnya?",
     arabic: "سَمِيعٌۢ بَصِيرٌ",
     options: ["Izhar Halqi", "Idgham Bighunnah", "Iqlab", "Ikhfa Syafawi"],
     answer: 2,
@@ -470,14 +470,14 @@ const questions = [
     category: "nun_sukun",
     subtopic: "ikhfa_haqiqi",
     question: "Hukum Nun sukun bertemu Tha (ط) pada lafaz ini adalah?",
-    arabic: "كُنتُمْ",
+    arabic: "مِن طِينٍ",
     options: ["Izhar Halqi", "Iqlab", "Idgham Bighunnah", "Ikhfa Haqiqi"],
     answer: 3,
     explanation: {
       title: "Ikhfa Haqiqi",
       text: "Nun sukun bertemu Tha (ط), huruf ikhfa haqiqi. Bunyi Nun disamarkan dengan dengung.",
-      example: "كُنتُمْ",
-      highlight: "نتُ"
+      example: "مِن طِينٍ",
+      highlight: "ن طِ"
     }
   },
 
@@ -820,7 +820,7 @@ const questions = [
     type: "ayat",
     category: "mad",
     subtopic: "mad_iwad",
-    question: "Lafaz ini bila diwaqafkan dibaca 'maulanaa', tanwin berubah jadi alif. Hukumnya?",
+    question: "Lafaz ini bila diwaqafkan dibaca 'maulaa', tanwin berubah jadi alif. Hukumnya?",
     arabic: "مَوْلًى",
     options: ["Mad Jaiz Munfasil", "Mad 'Aridh", "Mad Iwad", "Mad Thabi'i"],
     answer: 2,
@@ -2067,22 +2067,23 @@ const questions = [
   },
   {
     id: 98,
-    type: "teori",
+    type: "ayat",
     category: "gharib",
-    subtopic: "mad_qashr_khusus",
-    question: "Lafaz 'لَا أَذْبَحُهُ' pada QS. Al-Qalam mengandung bacaan khusus berupa?",
+    subtopic: "saktah",
+    question: "Pada QS. Al-Haqqah: 28-29, terdapat bacaan Saktah Jaiz antara 'maaliyah' dan 'halaka'. Disebut saktah karena?",
+    arabic: "مَالِيَهْ ۜ هَلَكَ",
     options: [
-      "Saktah pada Lam",
-      "Mad Farqi",
-      "Tashil pada hamzah",
-      "Imalah pada Lam"
+      "Berhenti lama",
+      "Berhenti sejenak tanpa bernapas",
+      "Langsung disambung tanpa berhenti",
+      "Dipanjangkan 6 harakat"
     ],
-    answer: 0,
+    answer: 1,
     explanation: {
-      title: "Bacaan Khusus (Saktah)",
-      text: "Pada QS. Al-Qalam: 17-18, ada saktah khusus (bukan tanda resmi mushaf Hafs biasa) yang dibahas dalam ilmu gharib. Ini bagian dari khilaf riwayat.",
-      example: "لَا أَذْبَحُهُ",
-      highlight: "لَا أَ"
+      title: "Saktah Jaiz",
+      text: "Saktah pada 'مَالِيَهْ ۜ هَلَكَ' adalah saktah jaiz (boleh saktah, boleh waqaf). Saktah berarti berhenti sejenak ±2 harakat tanpa mengambil napas baru.",
+      example: "مَالِيَهْ ۜ هَلَكَ",
+      highlight: "يَهْ ۜ هَ"
     }
   },
 

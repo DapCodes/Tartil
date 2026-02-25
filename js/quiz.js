@@ -46,138 +46,120 @@
 
   // ═══ Initialize ═══
   function init() {
-    // Clear previous session data
-    localStorage.removeItem('tartil_answers');
-    localStorage.removeItem('tartil_score');
-    localStorage.removeItem('tartil_time');
-    localStorage.removeItem('tartil_date');
+    // Check for existing active session in localStorage
+    const savedActiveQuestions = localStorage.getItem('tartil_active_questions_ids');
+    const savedShuffledMap = localStorage.getItem('tartil_shuffled_map');
+    const savedIndex = localStorage.getItem('tartil_current_index');
+    const savedAnswers = localStorage.getItem('tartil_answers_progress');
+    const savedStartTime = localStorage.getItem('tartil_start_time');
 
-    // Check for selected chapters from localStorage
-    const savedChapters = localStorage.getItem('tartil_selected_chapters');
-    let selectedChapters = [];
-    if (savedChapters) {
-      try {
-        selectedChapters = JSON.parse(savedChapters);
-      } catch (e) {
-        console.error("Error parsing selected chapters", e);
-      }
-    }
-
-    // Check for chapter filter from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    currentChapter = urlParams.get('chapter');
-
-    // Determine active questions
-    if (currentChapter) {
-      // Coming from explanation page for specific chapter
-      activeQuestions = questions.filter(q => q.category === currentChapter);
-      if (activeQuestions.length === 0) {
-        activeQuestions = questions.slice();
-        currentChapter = null;
-      }
-      activeQuestions = shuffleArray(activeQuestions);
-    } else if (selectedChapters.length > 0) {
-      // Coming from material selection page
-      const chapterQuestionsMap = {};
-      selectedChapters.forEach(chId => {
-        // Collect, filter and shuffle per chapter
-        chapterQuestionsMap[chId] = shuffleArray(questions.filter(q => q.category === chId));
-      });
-
-      // Proportional sampling: take 1 question per chapter in round-robin until limit
-      const totalQuestionsLimit = 20;
-      let activeQuestionsPool = [];
-      let addedInRound = 0;
+    if (savedActiveQuestions && savedShuffledMap) {
+      // Restore session
+      const qIds = JSON.parse(savedActiveQuestions);
+      activeQuestions = qIds.map(id => questions.find(q => q.id === id));
+      shuffledOptionsMap = JSON.parse(savedShuffledMap);
+      currentIndex = savedIndex ? parseInt(savedIndex, 10) : 0;
+      userAnswers = savedAnswers ? JSON.parse(savedAnswers) : new Array(activeQuestions.length).fill(null);
+      isRevealed = userAnswers.map(ans => ans !== null);
+      startTime = savedStartTime ? parseInt(savedStartTime, 10) : Date.now();
       
-      do {
-        addedInRound = 0;
-        for (let i = 0; i < selectedChapters.length; i++) {
-          if (activeQuestionsPool.length >= totalQuestionsLimit) break;
-          
-          const chId = selectedChapters[i];
-          const chQuestions = chapterQuestionsMap[chId];
-          
-          if (chQuestions && chQuestions.length > 0) {
-            activeQuestionsPool.push(chQuestions.shift());
-            addedInRound++;
-          }
-        }
-      } while (addedInRound > 0 && activeQuestionsPool.length < totalQuestionsLimit);
-
-      activeQuestions = shuffleArray(activeQuestionsPool);
-      
-      // Cleanup localStorage
-      localStorage.removeItem('tartil_selected_chapters');
+      const savedChapterId = localStorage.getItem('tartil_chapter');
+      currentChapter = savedChapterId || null;
     } else {
-      // Fallback: Use all questions
-      activeQuestions = questions.slice();
-      activeQuestions = shuffleArray(activeQuestions);
+      // Create new session
+      localStorage.removeItem('tartil_answers');
+      localStorage.removeItem('tartil_score');
+      localStorage.removeItem('tartil_time');
+      localStorage.removeItem('tartil_date');
+
+      const savedChapters = localStorage.getItem('tartil_selected_chapters');
+      let selectedChapters = [];
+      if (savedChapters) {
+        try {
+          selectedChapters = JSON.parse(savedChapters);
+        } catch (e) {
+          console.error("Error parsing selected chapters", e);
+        }
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      currentChapter = urlParams.get('chapter');
+
+      if (currentChapter) {
+        activeQuestions = questions.filter(q => q.category === currentChapter);
+        if (activeQuestions.length === 0) {
+          activeQuestions = questions.slice();
+          currentChapter = null;
+        }
+        activeQuestions = shuffleArray(activeQuestions);
+      } else if (selectedChapters.length > 0) {
+        const chapterQuestionsMap = {};
+        selectedChapters.forEach(chId => {
+          chapterQuestionsMap[chId] = shuffleArray(questions.filter(q => q.category === chId));
+        });
+
+        const totalQuestionsLimit = 20;
+        let activeQuestionsPool = [];
+        let addedInRound = 0;
+        
+        do {
+          addedInRound = 0;
+          for (let i = 0; i < selectedChapters.length; i++) {
+            if (activeQuestionsPool.length >= totalQuestionsLimit) break;
+            const chId = selectedChapters[i];
+            const chQuestions = chapterQuestionsMap[chId];
+            if (chQuestions && chQuestions.length > 0) {
+              activeQuestionsPool.push(chQuestions.shift());
+              addedInRound++;
+            }
+          }
+        } while (addedInRound > 0 && activeQuestionsPool.length < totalQuestionsLimit);
+
+        activeQuestions = shuffleArray(activeQuestionsPool);
+      } else {
+        activeQuestions = shuffleArray(questions.slice());
+      }
+
+      shuffledOptionsMap = activeQuestions.map(q => createShuffledOptions(q));
+      currentIndex = 0;
+      userAnswers = new Array(activeQuestions.length).fill(null);
+      isRevealed = new Array(activeQuestions.length).fill(false);
+      startTime = Date.now();
+
+      // Save initial session
+      localStorage.setItem('tartil_active_questions_ids', JSON.stringify(activeQuestions.map(q => q.id)));
+      localStorage.setItem('tartil_shuffled_map', JSON.stringify(shuffledOptionsMap));
+      localStorage.setItem('tartil_start_time', startTime.toString());
+      if (currentChapter) localStorage.setItem('tartil_chapter', currentChapter);
     }
 
-    // Prepare shuffled options for each question
-    shuffledOptionsMap = activeQuestions.map(q => {
-      return createShuffledOptions(q);
-    });
-
-    // Reset state
-    currentIndex = 0;
-    userAnswers = new Array(activeQuestions.length).fill(null);
-    isRevealed = new Array(activeQuestions.length).fill(false);
-    startTime = Date.now();
-
-    // Update topbar title if chapter-specific
     if (currentChapter) {
       const ch = chapters.find(c => c.id === currentChapter);
       if (ch) {
         const topbarTitle = document.querySelector('.quiz-topbar-title');
-        if (topbarTitle) {
-          topbarTitle.textContent = ch.title;
-        }
+        if (topbarTitle) topbarTitle.textContent = ch.title;
       }
     }
 
-    // Start timer
     startTimer();
-
-    // Load first question
     loadQuestion(currentIndex);
 
-    // Button events
     prevBtn.addEventListener('click', prevQuestion);
     nextBtn.addEventListener('click', nextQuestion);
-
-    // Keyboard navigation
     document.addEventListener('keydown', handleKeyboard);
   }
 
-  /**
-   * Create shuffled options for a question.
-   * Returns { options: [...], correctIndex: number, originalToShuffled: Map }
-   */
   function createShuffledOptions(q) {
-    // Create an array of { text, originalIndex }
-    const optionEntries = q.options.map((opt, i) => ({
-      text: opt,
-      originalIndex: i
-    }));
-
-    // Shuffle
+    const optionEntries = q.options.map((opt, i) => ({ text: opt, originalIndex: i }));
     const shuffled = shuffleArray(optionEntries);
-
-    // Find where the correct answer ended up
-    const correctIndex = shuffled.findIndex(
-      entry => entry.originalIndex === q.answer
-    );
-
+    const correctIndex = shuffled.findIndex(entry => entry.originalIndex === q.answer);
     return {
       options: shuffled.map(e => e.text),
       correctIndex: correctIndex,
-      // Map from shuffled index to original index
       shuffledToOriginal: shuffled.map(e => e.originalIndex)
     };
   }
 
-  // ═══ Timer ═══
   function startTimer() {
     updateTimerDisplay();
     timerInterval = setInterval(updateTimerDisplay, 1000);
@@ -201,20 +183,15 @@
     return Math.floor((Date.now() - startTime) / 1000);
   }
 
-  // ═══ Question Loading ═══
   function loadQuestion(index) {
     const q = activeQuestions[index];
     const shuffledOpts = shuffledOptionsMap[index];
     currentIndex = index;
+    localStorage.setItem('tartil_current_index', currentIndex.toString());
 
-    // Update progress bar
     updateProgressBar();
+    typeBadge.textContent = q.type === 'ayat' ? 'Soal Ayat' : 'Soal Teori';
 
-    // Type badge
-    const typeLabel = q.type === 'ayat' ? 'Soal Ayat' : 'Soal Teori';
-    typeBadge.textContent = typeLabel;
-
-    // Arabic display
     if (q.arabic && q.arabic.trim() !== '') {
       arabicDisplay.textContent = q.arabic;
       arabicDisplay.style.display = 'block';
@@ -222,57 +199,37 @@
       arabicDisplay.style.display = 'none';
     }
 
-    // Question text
     questionText.textContent = q.question;
-
-    // Build options (using shuffled order)
     buildOptions(q, index, shuffledOpts);
-
-    // Update navigation buttons
     updateNavButtons();
 
-    // Animate card entrance
     quizCard.style.animation = 'none';
-    quizCard.offsetHeight; // force reflow
+    quizCard.offsetHeight; 
     quizCard.style.animation = 'fadeInUp 0.35s ease-out';
   }
 
-  // ═══ Build Options ═══
   function buildOptions(q, qIndex, shuffledOpts) {
     optionsList.innerHTML = '';
-
     shuffledOpts.options.forEach((optText, optIndex) => {
       const btn = document.createElement('button');
       btn.className = 'option-btn';
       btn.setAttribute('data-index', optIndex);
+      btn.innerHTML = `<span class="option-letter">${letters[optIndex]}</span><span class="option-text">${optText}</span>`;
 
-      // Option letter circle + text
-      btn.innerHTML = `
-        <span class="option-letter">${letters[optIndex]}</span>
-        <span class="option-text">${optText}</span>
-      `;
-
-      // If this question was already answered
       if (userAnswers[qIndex] !== null) {
         if (isRevealed[qIndex]) {
-          // Show revealed state (correct/wrong)
           applyRevealedState(btn, optIndex, shuffledOpts.correctIndex, userAnswers[qIndex]);
         } else {
-          // Show selected state (gold)
-          if (userAnswers[qIndex] === optIndex) {
-            btn.classList.add('selected');
-          }
+          if (userAnswers[qIndex] === optIndex) btn.classList.add('selected');
           btn.addEventListener('click', () => selectAnswer(optIndex));
         }
       } else {
         btn.addEventListener('click', () => selectAnswer(optIndex));
       }
-
       optionsList.appendChild(btn);
     });
   }
 
-  // ═══ Apply Revealed State to Option ═══
   function applyRevealedState(btn, optIndex, correctIndex, selectedIndex) {
     if (optIndex === correctIndex) {
       btn.classList.add('correct');
@@ -285,38 +242,32 @@
     btn.disabled = true;
   }
 
-  // ═══ Answer Selection ═══
   function selectAnswer(optionIndex) {
-    // If already revealed for this question, do nothing
     if (isRevealed[currentIndex]) return;
-
-    // Save the answer (shuffled index)
     userAnswers[currentIndex] = optionIndex;
-
-    // Update visual — mark selected (gold) state
-    const allBtns = optionsList.querySelectorAll('.option-btn');
-    allBtns.forEach((btn, i) => {
-      btn.classList.remove('selected');
-      if (i === optionIndex) {
-        btn.classList.add('selected');
-      }
-    });
-
-    // Auto-save answers to localStorage
+    
+    // Auto reveal and auto advance
+    revealAnswer(currentIndex);
     saveToLocalStorage();
+
+    if (currentIndex < activeQuestions.length - 1) {
+      setTimeout(() => {
+        currentIndex++;
+        loadQuestion(currentIndex);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 800);
+    } else {
+      // Last question - stay on current view to show Selesai button
+      updateNavButtons();
+    }
   }
 
-  // ═══ Reveal Answer (on proceeding to next or finishing) ═══
   function revealAnswer(qIndex) {
     if (isRevealed[qIndex]) return;
-
     isRevealed[qIndex] = true;
-
-    // If we're currently viewing this question, update the UI
     if (qIndex === currentIndex) {
       const shuffledOpts = shuffledOptionsMap[qIndex];
       const allBtns = optionsList.querySelectorAll('.option-btn');
-
       allBtns.forEach((btn, i) => {
         btn.classList.remove('selected');
         applyRevealedState(btn, i, shuffledOpts.correctIndex, userAnswers[qIndex]);
@@ -324,29 +275,18 @@
     }
   }
 
-  // ═══ Navigation ═══
   function nextQuestion() {
-    // Validate: must select an answer before proceeding
     if (userAnswers[currentIndex] === null) {
       showToast('Pilih jawaban terlebih dahulu!');
       return;
     }
-
-    // Reveal the answer for current question
     revealAnswer(currentIndex);
-
-    // Check if last question
     if (currentIndex === activeQuestions.length - 1) {
       finishQuiz();
       return;
     }
-
-    // Wait a moment to show the reveal, then move
-    setTimeout(() => {
-      currentIndex++;
-      loadQuestion(currentIndex);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 600);
+    currentIndex++;
+    loadQuestion(currentIndex);
   }
 
   function prevQuestion() {
@@ -358,10 +298,10 @@
   }
 
   function handleKeyboard(e) {
-    if (e.key === 'ArrowRight' || e.key === 'Enter') {
-      nextQuestion();
-    } else if (e.key === 'ArrowLeft') {
-      prevQuestion();
+    if (e.key === 'Enter') {
+      if (currentIndex === activeQuestions.length - 1 && userAnswers[currentIndex] !== null) {
+        finishQuiz();
+      }
     } else if (e.key >= '1' && e.key <= '4') {
       const idx = parseInt(e.key) - 1;
       if (idx < activeQuestions[currentIndex].options.length && !isRevealed[currentIndex]) {
@@ -370,7 +310,6 @@
     }
   }
 
-  // ═══ Update UI Elements ═══
   function updateProgressBar() {
     const progress = ((currentIndex + 1) / activeQuestions.length) * 100;
     progressFill.style.width = `${progress}%`;
@@ -378,98 +317,73 @@
   }
 
   function updateNavButtons() {
-    // Previous button
-    prevBtn.disabled = currentIndex === 0;
-    prevBtn.style.opacity = currentIndex === 0 ? '0.4' : '1';
+    // Hide Prev/Next during normal auto-flow
+    prevBtn.style.display = 'none';
 
-    // Next/Finish button
     if (currentIndex === activeQuestions.length - 1) {
-      nextBtn.innerHTML = `
-        🏁 Selesai
-      `;
+      // Last question
+      nextBtn.style.display = 'flex';
+      nextBtn.textContent = 'Selesai';
       nextBtn.classList.remove('btn-primary');
       nextBtn.classList.add('btn-accent');
+      if (userAnswers[currentIndex] === null) {
+        nextBtn.style.opacity = '0.5';
+        nextBtn.disabled = true;
+      } else {
+        nextBtn.style.opacity = '1';
+        nextBtn.disabled = false;
+      }
     } else {
-      nextBtn.innerHTML = `
-        Selanjutnya
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-      `;
-      nextBtn.classList.remove('btn-accent');
-      nextBtn.classList.add('btn-primary');
+      // Not last question, hide Next button because we use auto-advance
+      nextBtn.style.display = 'none';
     }
   }
 
-  // ═══ Toast Notification ═══
   function showToast(message) {
     toastText.textContent = message;
     toast.classList.add('show');
-
     setTimeout(() => {
       toast.classList.remove('show');
     }, 2500);
   }
 
-  // ═══ Finish Quiz ═══
   function finishQuiz() {
     stopTimer();
-
-    // Reveal all
-    for (let i = 0; i < activeQuestions.length; i++) {
-      isRevealed[i] = true;
-    }
-
-    // Calculate score — compare user's shuffled answer with shuffled correct index
     let score = 0;
-    const originalAnswers = []; // For result page compatibility
+    const originalAnswers = [];
 
     for (let i = 0; i < activeQuestions.length; i++) {
       const shuffledOpts = shuffledOptionsMap[i];
       const isCorrect = userAnswers[i] === shuffledOpts.correctIndex;
       if (isCorrect) score++;
-
-      // Map user's selected shuffled index back to original index for result page
-      if (userAnswers[i] !== null) {
-        originalAnswers.push(shuffledOpts.shuffledToOriginal[userAnswers[i]]);
-      } else {
-        originalAnswers.push(null);
-      }
+      originalAnswers.push(userAnswers[i] !== null ? shuffledOpts.shuffledToOriginal[userAnswers[i]] : null);
     }
 
     const totalSeconds = getTotalSeconds();
-    const dateStr = new Date().toLocaleDateString('id-ID', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    });
+    const dateStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
-    // Save to localStorage — store original question IDs for result page
-    const questionIds = activeQuestions.map(q => q.id);
     localStorage.setItem('tartil_answers', JSON.stringify(originalAnswers));
-    localStorage.setItem('tartil_question_ids', JSON.stringify(questionIds));
+    localStorage.setItem('tartil_question_ids', JSON.stringify(activeQuestions.map(q => q.id)));
     localStorage.setItem('tartil_score', score.toString());
     localStorage.setItem('tartil_total', activeQuestions.length.toString());
     localStorage.setItem('tartil_time', totalSeconds.toString());
     localStorage.setItem('tartil_date', dateStr);
-    if (currentChapter) {
-      localStorage.setItem('tartil_chapter', currentChapter);
-    } else {
-      localStorage.removeItem('tartil_chapter');
-    }
-
-    // Also save score for home page banner
     localStorage.setItem('tartilScore', score.toString());
 
-    // Redirect to result page
-    setTimeout(() => {
-      window.location.href = 'result.html';
-    }, 400);
+    // Clean up session persistence
+    const keysToRemove = [
+      'tartil_active_questions_ids', 'tartil_shuffled_map', 
+      'tartil_current_index', 'tartil_answers_progress', 
+      'tartil_start_time', 'tartil_selected_chapters'
+    ];
+    keysToRemove.forEach(k => localStorage.removeItem(k));
+
+    setTimeout(() => { window.location.href = 'result.html'; }, 400);
   }
 
-  // ═══ Save Progress ═══
   function saveToLocalStorage() {
     localStorage.setItem('tartil_answers_progress', JSON.stringify(userAnswers));
   }
 
-  // ═══ Start ═══
   document.addEventListener('DOMContentLoaded', init);
 })();
