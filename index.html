@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tartil — Belajar Tajwid dengan Menyenangkan</title>
+  <meta name="description" content="Tartil adalah aplikasi interaktif untuk belajar dan menguji kemampuan tajwid Al-Qur'an. Cocok untuk semua kalangan umat Islam Indonesia.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
+</head>
+<body>
+  <div class="app-wrapper">
+
+    <!-- Bismillah Top Bar -->
+    <div class="top-bar">
+      <p class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <a href="index.html" class="logo-group" id="logoGroup">
+          <div class="logo-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="22" fill="#1B4332"/>
+              <path d="M30 10C25.5 10 18 13 16 20C14 27 17 36 24 38C17 36 12 28 14 20C16 12 24 8 30 10Z" fill="#D4AF37"/>
+              <circle cx="28" cy="14" r="2" fill="#D4AF37"/>
+            </svg>
+          </div>
+          <span class="logo-text">Tar<span>til</span></span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">
+          🌟 Gratis & Tanpa Iklan
+        </div>
+        <h1>Belajar Tajwid dengan Cara yang Menyenangkan</h1>
+        <p>Pelajari hukum-hukum tajwid dan uji pemahamanmu melalui kuis interaktif. Dirancang khusus untuk umat Islam Indonesia.</p>
+
+        <!-- Previous Score Banner -->
+        <div class="score-banner hidden" id="scoreBanner">
+          <div class="score-banner-text">
+            Tes terakhir: <strong id="lastScore">0</strong>/15
+          </div>
+          <a href="quiz.html">Ulangi Tes →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Cards -->
+    <section class="nav-cards">
+      <div class="container">
+        <div class="nav-cards-grid">
+
+          <a href="quiz.html" class="nav-card" id="startQuizCard">
+            <div class="nav-card-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"/>
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+              </svg>
+            </div>
+            <div class="nav-card-content">
+              <h3>Mulai Tes</h3>
+              <p>15 soal tajwid untuk menguji pemahamanmu</p>
+            </div>
+            <span class="nav-card-arrow">→</span>
+          </a>
+
+          <a href="explanation.html?id=1" class="nav-card" id="materiCard">
+            <div class="nav-card-icon gold">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+              </svg>
+            </div>
+            <div class="nav-card-content">
+              <h3>Materi Tajwid</h3>
+              <p>Pelajari 15 hukum tajwid lengkap dengan contoh</p>
+            </div>
+            <span class="nav-card-arrow">→</span>
+          </a>
+
+          <div class="nav-card" id="aboutCard" role="button" tabindex="0">
+            <div class="nav-card-icon blue">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+            </div>
+            <div class="nav-card-content">
+              <h3>Tentang Aplikasi</h3>
+              <p>Informasi tentang Tartil dan tujuannya</p>
+            </div>
+            <span class="nav-card-arrow">→</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="container">
+        <p class="features-title">Fitur Unggulan</p>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="icon">📖</div>
+            <div class="label">15 Materi</div>
+          </div>
+          <div class="feature-item">
+            <div class="icon">✍️</div>
+            <div class="label">Kuis Interaktif</div>
+          </div>
+          <div class="feature-item">
+            <div class="icon">📝</div>
+            <div class="label">Pembahasan</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>Tartil © 2024 — Belajar Tajwid Setiap Hari <span class="heart">♥</span></p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- About Modal -->
+  <div class="modal-overlay" id="aboutModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Tentang Tartil</h2>
+        <button class="modal-close" id="closeModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <strong>Tartil</strong> adalah aplikasi belajar tajwid interaktif yang dirancang khusus
+          untuk umat Islam Indonesia. Nama "Tartil" diambil dari perintah Allah SWT dalam
+          Al-Qur'an: <em>"...dan bacalah Al-Qur'an itu dengan perlahan-lahan (tartil)."</em>
+          (QS. Al-Muzzammil: 4)
+        </p>
+        <p>Fitur utama aplikasi ini meliputi:</p>
+        <ul>
+          <li>Kuis interaktif dengan 15 soal tajwid</li>
+          <li>Materi lengkap untuk 15 hukum tajwid</li>
+          <li>Contoh ayat Al-Qur'an dengan teks Arab</li>
+          <li>Penjelasan detail dalam Bahasa Indonesia</li>
+          <li>Dapat diakses secara gratis tanpa registrasi</li>
+          <li>Tampilan responsif untuk semua perangkat</li>
+        </ul>
+        <p>
+          Semoga aplikasi ini bermanfaat dan membantu meningkatkan kualitas bacaan
+          Al-Qur'an kita semua. <em>Jazakumullahu khairan.</em>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Check for previous score
+    document.addEventListener('DOMContentLoaded', () => {
+      const score = localStorage.getItem('tartilScore');
+      if (score !== null) {
+        const banner = document.getElementById('scoreBanner');
+        document.getElementById('lastScore').textContent = score;
+        banner.classList.remove('hidden');
+      }
+
+      // About modal
+      const aboutCard = document.getElementById('aboutCard');
+      const modal = document.getElementById('aboutModal');
+      const closeBtn = document.getElementById('closeModal');
+
+      aboutCard.addEventListener('click', () => {
+        modal.classList.add('active');
+      });
+
+      aboutCard.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          modal.classList.add('active');
+        }
+      });
+
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          modal.classList.remove('active');
+        }
+      });
+
+      // Navbar scroll effect
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

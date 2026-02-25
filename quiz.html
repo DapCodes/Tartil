@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Tajwid — Tartil</title>
+  <meta name="description" content="Uji kemampuan tajwid Anda dengan 15 soal interaktif seputar hukum bacaan Al-Qur'an.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
+</head>
+<body>
+  <div class="quiz-wrapper">
+
+    <!-- Quiz Top Bar -->
+    <div class="quiz-topbar">
+      <div class="container">
+        <!-- Left: Logo -->
+        <a href="index.html" class="quiz-topbar-logo" id="backBtn">
+          <div class="logo-icon-sm">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="22" fill="#1B4332"/>
+              <path d="M30 10C25.5 10 18 13 16 20C14 27 17 36 24 38C17 36 12 28 14 20C16 12 24 8 30 10Z" fill="#D4AF37"/>
+              <circle cx="28" cy="14" r="2" fill="#D4AF37"/>
+            </svg>
+          </div>
+          <span class="quiz-topbar-title">Tartil</span>
+        </a>
+
+        <!-- Center: Progress -->
+        <div class="quiz-progress-area">
+          <div class="quiz-progress-info">
+            <span id="questionNum">Soal 1 / 15</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill" style="width: 6.67%"></div>
+          </div>
+        </div>
+
+        <!-- Right: Timer -->
+        <div class="quiz-timer" id="quizTimer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+          <span id="timerDisplay">0:00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Content -->
+    <main class="quiz-content">
+      <div class="container">
+        <div class="quiz-card" id="quizCard">
+          <!-- Type Badge -->
+          <div class="quiz-type-badge" id="typeBadge">
+            📖 Soal Ayat
+          </div>
+
+          <!-- Arabic Display -->
+          <div class="quiz-arabic-display" id="arabicDisplay" dir="rtl">
+            بِسْمِ اللَّهِ
+          </div>
+
+          <!-- Question Text -->
+          <p class="quiz-question-text" id="questionText">
+            Memuat pertanyaan...
+          </p>
+
+          <!-- Options -->
+          <div class="options-list" id="optionsList">
+            <!-- Options injected by JS -->
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="quiz-nav-buttons" id="quizNavButtons">
+            <button class="btn btn-ghost" id="prevBtn" disabled>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+              Sebelumnya
+            </button>
+            <button class="btn btn-primary" id="nextBtn">
+              Selanjutnya
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+      <span class="toast-icon">⚠️</span>
+      <span class="toast-text" id="toastText">Pilih jawaban terlebih dahulu!</span>
+    </div>
+  </div>
+
+  <script src="data/questions.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>
