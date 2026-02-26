@@ -153,17 +153,25 @@
         // Simple loading animation
         let progress = 0;
         const interval = setInterval(() => {
-          progress += Math.random() * 30;
+          progress += Math.random() * 25;
           if (progress >= 100) {
             progress = 100;
             clearInterval(interval);
+            
             setTimeout(() => {
+              // Start fade out
               splash.classList.add('fade-out');
-              document.body.classList.remove('loading');
-              sessionStorage.setItem('tartilVisited', 'true');
+              
+              // Fade in the app content slightly after
+              setTimeout(() => {
+                document.body.classList.remove('loading');
+                sessionStorage.setItem('tartilVisited', 'true');
+              }, 100);
+
+              // Remove from DOM after transition
               setTimeout(() => {
                 splash.style.display = 'none';
-              }, 500);
+              }, 600);
             }, 500);
           }
           progressBar.style.width = progress + '%';
