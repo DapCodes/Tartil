@@ -11,236 +11,190 @@ const chapters = [
   {
     id: "nun_sukun",
     title: "Nun Sukun & Tanwin",
+    icon: "نْ",
     description: "Hukum yang terjadi apabila Nun Sukun (نْ) atau Tanwin (ً ٍ ٌ) bertemu dengan huruf-huruf tertentu.",
-    longDescription: "Hukum Nun Sukun dan Tanwin adalah salah satu dasar terpenting dalam ilmu Tajwid. Hukum ini mengatur bagaimana cara kita mengucapkan bunyi 'n' (baik dari nun mati maupun tanwin) ketika bertemu dengan salah satu dari 28 huruf hijaiyah. Terdapat lima pembagian utama: Izhar (jelas), Idgham Bighunnah (masuk dengan dengung), Idgham Bilaghunnah (masuk tanpa dengung), Iqlab (menjadi bunyi mim), dan Ikhfa (samar).",
+    longDescription: "Hukum Nun Sukun dan Tanwin adalah salah satu dasar terpenting dalam ilmu Tajwid. Hukum ini mengatur bagaimana cara kita mengucapkan bunyi 'n' saat bertemu salah satu dari 28 huruf hijaiyah. Terdapat lima pembagian utama: Izhar, Idgham Bighunnah, Idgham Bilaghunnah, Iqlab, dan Ikhfa.",
     materi: [
-      "1. **Izhar Halqi**: Membaca Nun/Tanwin dengan jelas tanpa dengung. Hurufnya: ء ه ع ح غ خ.",
-      "2. **Idgham Bighunnah**: Memasukkan Nun/Tanwin ke huruf berikutnya disertai dengung. Hurufnya: ي ن م و.",
-      "3. **Idgham Bilaghunnah**: Memasukkan Nun/Tanwin ke huruf berikutnya tanpa dengung. Hurufnya: ل ر.",
-      "4. **Iqlab**: Mengubah bunyi Nun/Tanwin menjadi bunyi Mim (م) saat bertemu Ba (ب).",
-      "5. **Ikhfa Haqiqi**: Menyamarkan bunyi Nun/Tanwin disertai dengung. Hurufnya: ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك."
+      "1. Izhar Halqi: Membaca Nun/Tanwin dengan jelas tanpa dengung. Hurufnya: ء ه ع ح غ خ.",
+      "2. Idgham Bighunnah: Memasukkan Nun/Tanwin ke huruf berikutnya disertai dengung 2 harakat. Hurufnya: ي ن م و.",
+      "3. Idgham Bilaghunnah: Memasukkan Nun/Tanwin ke huruf berikutnya tanpa dengung. Hurufnya: ل ر.",
+      "4. Iqlab: Mengubah bunyi Nun/Tanwin menjadi bunyi Mim (م) saat bertemu Ba (ب), disertai dengung.",
+      "5. Ikhfa Haqiqi: Menyamarkan bunyi Nun/Tanwin disertai dengung antara izhar dan idgham. Hurufnya: ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك."
     ],
     examples: [
-      {
-        title: "Izhar Halqi (ء ه ع ح غ خ)",
-        arabic: "مِنْ عِلْمٍ",
-        highlight: "نْ ع",
-        explanation: "Nun mati bertemu 'Ain (ع). Dibaca jelas tanpa mendengung."
-      },
-      {
-        title: "Idgham Bighunnah (ي ن م و)",
-        arabic: "مَن يَعْمَلْ",
-        highlight: "ن ي",
-        explanation: "Nun mati bertemu Ya (ي). Suara nun masuk ke Ya disertai dengung 2 harakat."
-      },
-      {
-        title: "Idgham Bilaghunnah (ل ر)",
-        arabic: "مِن رَّبِّهِمْ",
-        highlight: "ن ر",
-        explanation: "Nun mati bertemu Ra (ر). Suara nun masuk ke Ra tanpa dengung."
-      },
-      {
-        title: "Iqlab (ب)",
-        arabic: "مِنۢ بَعْدِ",
-        highlight: "نۢ ب",
-        explanation: "Nun mati bertemu Ba (ب). Bunyi nun berubah menjadi mim disertai dengung."
-      },
-      {
-        title: "Ikhfa Haqiqi",
-        arabic: "مُنذِرٌ",
-        highlight: "نذ",
-        explanation: "Nun mati bertemu Dzal (ذ). Bunyi nun dibaca samar disertai dengung."
-      }
+      { title: "Izhar – bertemu Hamzah (ء)", arabic: "مَنْ آمَنَ", highlight: "نْ ء", explanation: "Nun mati bertemu Hamzah. Dibaca jelas tanpa dengung sama sekali." },
+      { title: "Izhar – bertemu Ha (ه)", arabic: "مِنْهُم", highlight: "نْ ه", explanation: "Nun mati bertemu Ha. Dibaca jelas, tidak boleh ada dengung." },
+      { title: "Izhar – bertemu 'Ain (ع)", arabic: "مِنْ عِلْمٍ", highlight: "نْ ع", explanation: "Nun mati bertemu 'Ain. Dibaca jelas tanpa dengung." },
+      { title: "Izhar – bertemu Ha (ح)", arabic: "مَنْ حَوْلَكَ", highlight: "نْ ح", explanation: "Nun mati bertemu Ha. Izhar halqi, dibaca terang." },
+      { title: "Izhar – bertemu Ghain (غ)", arabic: "مِنْ غِلٍّ", highlight: "نْ غ", explanation: "Nun mati bertemu Ghain. Dibaca jelas." },
+      { title: "Izhar – bertemu Kha (خ)", arabic: "مِنْ خَيْرٍ", highlight: "نْ خ", explanation: "Nun mati bertemu Kha. Dibaca jelas tanpa dengung." },
+      { title: "Izhar – Tanwin bertemu Hamzah", arabic: "عَلِيمٌ أَحَدٌ", highlight: "ٌ أ", explanation: "Tanwin dhammah bertemu Hamzah. Dibaca jelas." },
+      { title: "Idgham Bighunnah – bertemu Ya (ي)", arabic: "مَن يَعْمَلْ", highlight: "نْ ي", explanation: "Nun mati bertemu Ya. Suara nun masuk ke Ya dengan dengung 2 harakat." },
+      { title: "Idgham Bighunnah – bertemu Nun (ن)", arabic: "مِن نِعْمَةٍ", highlight: "نْ ن", explanation: "Nun mati bertemu Nun. Masuk dengan dengung." },
+      { title: "Idgham Bighunnah – bertemu Mim (م)", arabic: "مِن مَاءٍ", highlight: "نْ م", explanation: "Nun mati bertemu Mim. Masuk dengan dengung 2 harakat." },
+      { title: "Idgham Bighunnah – bertemu Waw (و)", arabic: "مِن وَلِيٍّ", highlight: "نْ و", explanation: "Nun mati bertemu Waw. Masuk dengan dengung." },
+      { title: "Idgham Bighunnah – Tanwin bertemu Mim", arabic: "رَحِيمٌ مُقْتَدِرٌ", highlight: "ٌ م", explanation: "Tanwin dhammah bertemu Mim. Masuk dengan dengung." },
+      { title: "Idgham Bilaghunnah – bertemu Lam (ل)", arabic: "مِن لَّدُنْهُ", highlight: "نْ ل", explanation: "Nun mati bertemu Lam. Masuk tanpa dengung sama sekali." },
+      { title: "Idgham Bilaghunnah – bertemu Ra (ر)", arabic: "مِن رَّبِّهِمْ", highlight: "نْ ر", explanation: "Nun mati bertemu Ra. Masuk tanpa dengung." },
+      { title: "Idgham Bilaghunnah – Tanwin bertemu Ra", arabic: "غَفُورٌ رَّحِيمٌ", highlight: "ٌ ر", explanation: "Tanwin dhammah bertemu Ra. Idgham bilaghunnah." },
+      { title: "Iqlab – bertemu Ba (ب)", arabic: "مِنۢ بَعْدِ", highlight: "نۢ ب", explanation: "Nun mati bertemu Ba. Bunyi nun berubah menjadi Mim dengan dengung." },
+      { title: "Iqlab – Tanwin bertemu Ba", arabic: "سَمِيعٌۢ بَصِيرٌ", highlight: "ٌۢ ب", explanation: "Tanwin dhammah bertemu Ba. Bunyi tanwin berubah jadi Mim dengan dengung." },
+      { title: "Ikhfa – bertemu Ta (ت)", arabic: "كُنتُمْ", highlight: "نت", explanation: "Nun mati bertemu Ta. Dibaca samar antara nun dan ta dengan dengung." },
+      { title: "Ikhfa – bertemu Tsa (ث)", arabic: "مَنثُورًا", highlight: "نث", explanation: "Nun mati bertemu Tsa. Ikhfa haqiqi dengan dengung." },
+      { title: "Ikhfa – bertemu Jim (ج)", arabic: "مِنْ جُوعٍ", highlight: "نْج", explanation: "Nun mati bertemu Jim. Dibaca samar dengan dengung." },
+      { title: "Ikhfa – bertemu Dal (د)", arabic: "عِندَهُمْ", highlight: "ند", explanation: "Nun mati bertemu Dal. Ikhfa haqiqi." },
+      { title: "Ikhfa – bertemu Dzal (ذ)", arabic: "مُنذِرٌ", highlight: "نذ", explanation: "Nun mati bertemu Dzal. Dibaca samar dengan dengung." },
+      { title: "Ikhfa – bertemu Za (ز)", arabic: "أَنزَلَ", highlight: "نز", explanation: "Nun mati bertemu Za. Ikhfa haqiqi." },
+      { title: "Ikhfa – bertemu Sin (س)", arabic: "إِنسَانٌ", highlight: "نس", explanation: "Nun mati bertemu Sin. Dibaca samar dengan dengung." },
+      { title: "Ikhfa – bertemu Syin (ش)", arabic: "مَنشُورًا", highlight: "نش", explanation: "Nun mati bertemu Syin. Ikhfa haqiqi." },
+      { title: "Ikhfa – bertemu Shad (ص)", arabic: "أَنصَارٌ", highlight: "نص", explanation: "Nun mati bertemu Shad. Dibaca samar." },
+      { title: "Ikhfa – bertemu Dhad (ض)", arabic: "مَنضُودٌ", highlight: "نض", explanation: "Nun mati bertemu Dhad. Ikhfa haqiqi." },
+      { title: "Ikhfa – bertemu Tha (ط)", arabic: "يَنطِقُ", highlight: "نط", explanation: "Nun mati bertemu Tha. Dibaca samar dengan dengung." },
+      { title: "Ikhfa – bertemu Zha (ظ)", arabic: "يَنظُرُونَ", highlight: "نظ", explanation: "Nun mati bertemu Zha. Ikhfa haqiqi." },
+      { title: "Ikhfa – bertemu Fa (ف)", arabic: "أَنفُسَكُمْ", highlight: "نف", explanation: "Nun mati bertemu Fa. Dibaca samar." },
+      { title: "Ikhfa – bertemu Qaf (ق)", arabic: "مِنقَارٍ", highlight: "نق", explanation: "Nun mati bertemu Qaf. Ikhfa haqiqi." },
+      { title: "Ikhfa – bertemu Kaf (ك)", arabic: "أَنكَالًا", highlight: "نك", explanation: "Nun mati bertemu Kaf. Dibaca samar dengan dengung." }
     ]
   },
   {
     id: "mim_sukun",
     title: "Mim Sukun",
+    icon: "مْ",
     description: "Hukum yang terjadi apabila Mim Sukun (مْ) bertemu dengan huruf hijaiyah.",
-    longDescription: "Hukum Mim Sukun mengatur cara pengucapan huruf Mim yang mati (sukun) saat bertemu dengan huruf hijaiyah lainnya. Berbeda dengan Nun Sukun, Mim Sukun hanya memiliki tiga hukum: Ikhfa Syafawi (ketemu Ba), Idgham Mimi (ketemu Mim), dan Izhar Syafawi (ketemu huruf lainnya).",
+    longDescription: "Hukum Mim Sukun mengatur cara pengucapan huruf Mim yang mati saat bertemu huruf hijaiyah. Mim Sukun memiliki tiga hukum: Ikhfa Syafawi (bertemu Ba), Idgham Mimi (bertemu Mim), dan Izhar Syafawi (bertemu huruf lainnya).",
     materi: [
-      "1. **Izhar Syafawi**: Mim sukun bertemu huruf selain Mim dan Ba, dibaca jelas.",
-      "2. **Ikhfa Syafawi**: Mim sukun bertemu Ba (ب), dibaca samar dengan dengung.",
-      "3. **Idgham Mimi (Mutamatsilain)**: Mim sukun bertemu Mim, dimasukkan dengan dengung."
+      "1. Izhar Syafawi: Mim sukun bertemu 26 huruf selain Mim dan Ba, dibaca jelas tanpa dengung.",
+      "2. Ikhfa Syafawi: Mim sukun bertemu Ba (ب), dibaca samar dengan dengung di bibir (syafatain).",
+      "3. Idgham Mimi (Mutamatsilain): Mim sukun bertemu Mim (م), dimasukkan disertai dengung 2 harakat."
     ],
     examples: [
-      {
-        title: "Izhar Syafawi",
-        arabic: "لَهُمْ فِيهَا",
-        highlight: "مْ ف",
-        explanation: "Mim mati bertemu Fa (ف). Dibaca jelas tanpa dengung."
-      },
-      {
-        title: "Ikhfa Syafawi",
-        arabic: "تَرْمِيهِم بِحِجَارَةٍ",
-        highlight: "مْ ب",
-        explanation: "Mim mati bertemu Ba (ب). Dibaca samar dengan dengung di bibir."
-      },
-      {
-        title: "Idgham Mimi",
-        arabic: "لَكُم مَّا كَسَبْتُمْ",
-        highlight: "مْ م",
-        explanation: "Mim mati bertemu Mim (م). Mim pertama masuk ke Mim kedua dengan dengung."
-      }
+      { title: "Izhar Syafawi – bertemu Fa (ف)", arabic: "لَهُمْ فِيهَا", highlight: "مْ ف", explanation: "Mim mati bertemu Fa. Dibaca jelas tanpa dengung." },
+      { title: "Izhar Syafawi – bertemu Kaf (ك)", arabic: "عَلَيْهِمْ كَذٰلِكَ", highlight: "مْ ك", explanation: "Mim mati bertemu Kaf. Izhar syafawi, jelas." },
+      { title: "Izhar Syafawi – bertemu Ta (ت)", arabic: "هُمْ تُرْجَعُونَ", highlight: "مْ ت", explanation: "Mim mati bertemu Ta. Dibaca jelas." },
+      { title: "Izhar Syafawi – bertemu Waw (و)", arabic: "وَمَا هُمْ وَمَا", highlight: "مْ و", explanation: "Mim mati bertemu Waw. Hati-hati tidak mendengung, karena ini bukan Waw huruf Mad." },
+      { title: "Izhar Syafawi – bertemu Jim (ج)", arabic: "بِهِمْ جَمِيعًا", highlight: "مْ ج", explanation: "Mim mati bertemu Jim. Dibaca jelas." },
+      { title: "Izhar Syafawi – bertemu Ha (ه)", arabic: "إِلَيْهِمْ هُدًى", highlight: "مْ ه", explanation: "Mim mati bertemu Ha. Izhar syafawi." },
+      { title: "Izhar Syafawi – bertemu Nun (ن)", arabic: "أَمْ نَحْنُ", highlight: "مْ ن", explanation: "Mim mati bertemu Nun. Dibaca jelas." },
+      { title: "Ikhfa Syafawi – bertemu Ba (ب)", arabic: "تَرْمِيهِم بِحِجَارَةٍ", highlight: "مْ ب", explanation: "Mim mati bertemu Ba. Bibir hampir bertemu, dibaca samar dengan dengung." },
+      { title: "Ikhfa Syafawi – bertemu Ba (ب)", arabic: "وَهُمْ بِالْآخِرَةِ", highlight: "مْ ب", explanation: "Mim mati bertemu Ba. Ikhfa syafawi, dengung di bibir." },
+      { title: "Ikhfa Syafawi – bertemu Ba (ب)", arabic: "أَعْصِمُ بِهِمْ", highlight: "مْ ب", explanation: "Ikhfa syafawi, dengung samar 2 harakat." },
+      { title: "Idgham Mimi – bertemu Mim (م)", arabic: "لَكُم مَّا كَسَبْتُمْ", highlight: "مْ م", explanation: "Mim pertama masuk ke Mim kedua disertai dengung 2 harakat." },
+      { title: "Idgham Mimi – bertemu Mim (م)", arabic: "أَمْ مَن يَكُونُ", highlight: "مْ م", explanation: "Idgham mimi, dengung sempurna." },
+      { title: "Idgham Mimi – bertemu Mim (م)", arabic: "كَمَا أَرْسَلْنَا فِيكُم مِّنكُمْ", highlight: "مْ م", explanation: "Mim sukun bertemu Mim bertasydid, masuk dengan dengung." }
     ]
   },
   {
     id: "mad",
     title: "Mad (Panjang Pendek)",
+    icon: "مد",
     description: "Memanjangkan bunyi huruf karena adanya huruf Mad (ا و ي).",
-    longDescription: "Mad secara bahasa berarti memanjangkan. Dalam tajwid, Mad adalah memanjangkan suara saat mengucapkan huruf-huruf Mad (Alif, Waw, Ya). Mad dibagi menjadi dua besar: Mad Thabi'i (Asli) dan Mad Far'i (Cabang). Menguasai Mad sangat penting agar tidak salah dalam mengubah arti kata dalam Al-Qur'an.",
+    longDescription: "Mad secara bahasa berarti memanjangkan. Dalam tajwid, Mad adalah memanjangkan suara pada huruf Mad (Alif, Waw, Ya). Mad dibagi menjadi dua besar: Mad Thabi'i (Asli) sebagai pondasi, dan Mad Far'i (Cabang) sebagai pengembangan. Ada 15 jenis Mad yang perlu dikuasai.",
     materi: [
-      "**Mad Thabi'i (Asli)**: Panjang 2 harakat. Dasar semua mad.",
-      "**Mad Wajib Muttasil**: Mad bertemu hamzah dalam satu kata, 4–5 harakat.",
-      "**Mad Jaiz Munfasil**: Mad bertemu hamzah di lain kata, 2–5 harakat.",
-      "**Mad 'Aridh Lissukun**: Mad di akhir kata saat waqaf, 2–6 harakat.",
-      "**Mad Iwad**: Tanwin fathah di akhir kata saat waqaf dibaca 2 harakat."
+      "MAD ASLI:",
+      "1. Mad Thabi'i (Asli): Panjang 2 harakat. Alif didahului fathah, Waw didahului dhammah, Ya didahului kasrah.",
+      "MAD FAR'I (CABANG) – KELOMPOK HAMZAH:",
+      "2. Mad Wajib Muttasil: Mad bertemu hamzah dalam SATU kata, wajib 4–5 harakat.",
+      "3. Mad Jaiz Munfasil: Mad bertemu hamzah di kata BERBEDA, boleh 2–5 harakat.",
+      "4. Mad Shilah Thawilah: Ha dhamir bertemu hamzah di lain kata, 4–5 harakat.",
+      "5. Mad Shilah Qashirah: Ha dhamir tidak bertemu hamzah, 2 harakat.",
+      "MAD FAR'I – KELOMPOK SUKUN:",
+      "6. Mad 'Aridh Lissukun: Mad di akhir kata saat waqaf, 2–6 harakat.",
+      "7. Mad Lazim Kilmi Mutsaqqal: Mad bertemu huruf bertasydid dalam satu kata, 6 harakat.",
+      "8. Mad Lazim Kilmi Mukhaffaf: Mad bertemu huruf sukun dalam satu kata, 6 harakat.",
+      "9. Mad Lazim Harfi Mutsaqqal: Huruf fawatihus suwar yang huruf tengahnya mad dan disambung (ادغام), 6 harakat.",
+      "10. Mad Lazim Harfi Mukhaffaf: Huruf fawatihus suwar yang tidak disambung (ادغام), 6 harakat.",
+      "MAD FAR'I – LAINNYA:",
+      "11. Mad Lin: Huruf Waw/Ya sukun didahului fathah, diikuti sukun karena waqaf, 2–6 harakat.",
+      "12. Mad Iwad: Tanwin fathah di akhir kata saat waqaf dibaca alif panjang 2 harakat.",
+      "13. Mad Badal: Hamzah diikuti huruf Mad di satu kata, 2 harakat.",
+      "14. Mad Tamkin: Ya bertasydid bertemu Ya sukun, 2 harakat.",
+      "15. Mad Farq: Mad untuk membedakan istifham (kalimat tanya) dari kata lain, 6 harakat."
     ],
     examples: [
-      {
-        title: "Mad Thabi'i",
-        arabic: "قَالَ",
-        highlight: "قَا",
-        explanation: "Alif didahului harakat fathah. Dibaca panjang 2 harakat."
-      },
-      {
-        title: "Mad Wajib Muttasil",
-        arabic: "جَاءَ",
-        highlight: "اءَ",
-        explanation: "Mad bertemu hamzah dalam satu kata. Panjang 4-5 harakat."
-      },
-      {
-        title: "Mad Jaiz Munfasil",
-        arabic: "يَا أَيُّهَا",
-        highlight: "يَا أَ",
-        explanation: "Mad bertemu hamzah di kata yang berbeda. Panjang 2-5 harakat."
-      }
+      { title: "Mad Thabi'i – Alif (ا)", arabic: "قَالَ", highlight: "قَا", explanation: "Alif didahului fathah. Dibaca panjang 2 harakat." },
+      { title: "Mad Thabi'i – Waw (و)", arabic: "يَقُولُ", highlight: "قُو", explanation: "Waw didahului dhammah. Dibaca panjang 2 harakat." },
+      { title: "Mad Thabi'i – Ya (ي)", arabic: "رَحِيمٌ", highlight: "حِي", explanation: "Ya didahului kasrah. Dibaca panjang 2 harakat." },
+      { title: "Mad Wajib Muttasil – dalam satu kata", arabic: "جَاءَ", highlight: "اءَ", explanation: "Mad Thabi'i bertemu Hamzah dalam satu kata. Panjang 4-5 harakat, wajib." },
+      { title: "Mad Wajib Muttasil", arabic: "السَّمَاءَ", highlight: "مَاءَ", explanation: "Alif mad bertemu Hamzah dalam satu kata. Panjang 4-5 harakat." },
+      { title: "Mad Wajib Muttasil – Ya", arabic: "شَيْءٌ", highlight: "يْءٌ", explanation: "Ya mad bertemu Hamzah dalam satu kata. Wajib panjang." },
+      { title: "Mad Wajib Muttasil – Waw", arabic: "سُوءٌ", highlight: "وءٌ", explanation: "Waw mad bertemu Hamzah. Panjang 4-5 harakat." },
+      { title: "Mad Jaiz Munfasil", arabic: "يَا أَيُّهَا", highlight: "يَا أَ", explanation: "Mad Ya bertemu Hamzah di kata berbeda. Panjang 2–5 harakat." },
+      { title: "Mad Jaiz Munfasil", arabic: "إِنَّا أَعْطَيْنَاكَ", highlight: "نَا أَ", explanation: "Mad Alif bertemu Hamzah di kata berbeda." },
+      { title: "Mad Jaiz Munfasil", arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ", highlight: "وَ أَ", explanation: "Waw mad bertemu Hamzah di kata berbeda." },
+      { title: "Mad Shilah Thawilah", arabic: "إِنَّهُ أَنَا اللَّهُ", highlight: "هُ أَ", explanation: "Ha dhamir bertemu hamzah di lain kata. Dibaca 4–5 harakat." },
+      { title: "Mad Shilah Qashirah", arabic: "إِنَّهُ كَانَ", highlight: "هُ كَ", explanation: "Ha dhamir tidak bertemu hamzah. Dibaca 2 harakat." },
+      { title: "Mad 'Aridh Lissukun", arabic: "نَسْتَعِينُ ۝", highlight: "نُ (waqaf)", explanation: "Mad sebelum huruf yang disukunkan saat waqaf. Panjang 2–6 harakat." },
+      { title: "Mad 'Aridh Lissukun", arabic: "الْعَالَمِينَ ۝", highlight: "نَ (waqaf)", explanation: "Waqaf di akhir ayat, mad aridh. Dibaca 2, 4, atau 6 harakat." },
+      { title: "Mad Lazim Kilmi Mutsaqqal", arabic: "وَلَا الضَّالِّينَ", highlight: "الضَّالِّ", explanation: "Mad Alif bertemu huruf bertasydid (Lam) dalam satu kata. Wajib 6 harakat." },
+      { title: "Mad Lazim Kilmi Mutsaqqal", arabic: "تَحَاجُّونَ", highlight: "حَاجُّ", explanation: "Mad bertemu huruf tasydid dalam satu kata. 6 harakat." },
+      { title: "Mad Lazim Kilmi Mukhaffaf", arabic: "آلْآنَ", highlight: "آلْ", explanation: "Mad bertemu huruf sukun dalam satu kata. 6 harakat (hanya ada di QS Yunus)." },
+      { title: "Mad Lazim Harfi Mutsaqqal – ل م", arabic: "الم ۝", highlight: "لا م", explanation: "Huruf Lam dieja (لاَمْ): Mad bertemu mim, disambung. 6 harakat." },
+      { title: "Mad Lazim Harfi Mutsaqqal – ع س ق", arabic: "عسق ۝", highlight: "عَيْن", explanation: "Huruf 'Ain dieja (عَيْن): mad bertemu nun, disambung. 6 harakat." },
+      { title: "Mad Lazim Harfi Mukhaffaf – ن", arabic: "ن ۝", highlight: "نُون", explanation: "Huruf Nun dieja (نُونْ): mad diikuti huruf sukun tanpa disambung. 6 harakat." },
+      { title: "Mad Lazim Harfi Mukhaffaf – ق", arabic: "ق ۝", highlight: "قَاف", explanation: "Huruf Qaf dieja (قَافْ): mad diikuti huruf sukun. 6 harakat." },
+      { title: "Mad Lin – Waw", arabic: "خَوْفٌ ۝ (waqaf)", highlight: "خَوْ", explanation: "Waw sukun didahului fathah, lalu waqaf. Dibaca 2–6 harakat." },
+      { title: "Mad Lin – Ya", arabic: "بَيْتٌ ۝ (waqaf)", highlight: "بَيْ", explanation: "Ya sukun didahului fathah, lalu waqaf. Mad Lin 2–6 harakat." },
+      { title: "Mad Iwad", arabic: "عَلِيمًا ۝ (waqaf)", highlight: "يمًا→يمَا", explanation: "Tanwin fathah saat waqaf dibaca seperti mad thabi'i alif. 2 harakat." },
+      { title: "Mad Iwad", arabic: "حَكِيمًا ۝", highlight: "مًا→مَا", explanation: "Tanwin fathah berubah jadi alif panjang saat waqaf." },
+      { title: "Mad Badal", arabic: "آمَنَ", highlight: "آ", explanation: "Hamzah bertemu Alif Mad (berasal dari dua hamzah: أَأْ → آ). 2 harakat." },
+      { title: "Mad Badal", arabic: "أُوتُوا", highlight: "أُو", explanation: "Hamzah diikuti Waw Mad. Mad Badal 2 harakat." },
+      { title: "Mad Tamkin", arabic: "النَّبِيِّينَ", highlight: "يِّي", explanation: "Ya bertasydid bertemu Ya sukun. Dibaca 2 harakat." },
+      { title: "Mad Tamkin", arabic: "حُيِّيتُمْ", highlight: "يِّي", explanation: "Ya tasydid bertemu Ya sukun. Mad Tamkin 2 harakat." },
+      { title: "Mad Farq", arabic: "قُلْ آلذَّكَرَيْنِ", highlight: "آلْ", explanation: "Mad panjang 6 harakat untuk membedakan hamzah istifham (pertanyaan) dari Alif Lam." }
     ]
   },
   {
     id: "ra",
-    title: "Ra Tafkhim & Tarqiq",
-    description: "Hukum menebalkan atau menipiskan bunyi huruf Ra (ر).",
-    longDescription: "Hukum Ra mengatur kapan huruf Ra (ر) harus dibaca tebal (Tafkhim) atau tipis (Tarqiq). Ini sangat bergantung pada harakat huruf Ra itu sendiri atau harakat huruf sebelumnya. Membedakan ketebalan Ra memberikan keindahan dan ketepatan dalam pelafalan Al-Qur'an.",
+    title: "Ra (Tafkhim & Tarqiq)",
+    icon: "ر",
+    description: "Hukum menebalkan (Tafkhim) atau menipiskan (Tarqiq) bunyi huruf Ra (ر).",
+    longDescription: "Hukum Ra mengatur kapan huruf Ra harus dibaca tebal (Tafkhim) atau tipis (Tarqiq). Ini bergantung pada harakat Ra itu sendiri, harakat huruf sebelumnya, dan huruf sesudahnya. Ada juga kondisi Ra Jaiz (boleh tebal atau tipis).",
     materi: [
-      "1. **Ra Tafkhim (Tebal)**: Ra berharakat fathah atau dhammah (رَ, رُ) atau Ra sukun didahului fathah/dhammah.",
-      "2. **Ra Tarqiq (Tipis)**: Ra berharakat kasrah (رِ) atau Ra sukun didahului kasrah asli.",
-      "3. **Ra Jaiz**: Boleh tebal atau tipis dalam kondisi tertentu (Ra sukun didahului kasrah, setelahnya huruf Isti'la)."
+      "RA TAFKHIM (Dibaca Tebal):",
+      "1. Ra berharakat Fathah (رَ).",
+      "2. Ra berharakat Dhammah (رُ).",
+      "3. Ra sukun didahului huruf berharakat Fathah.",
+      "4. Ra sukun didahului huruf berharakat Dhammah.",
+      "5. Ra sukun di awal kata (dibaca dengan harakat fathah/dhammah karena ibtida').",
+      "RA TARQIQ (Dibaca Tipis):",
+      "6. Ra berharakat Kasrah (رِ).",
+      "7. Ra sukun didahului huruf berharakat Kasrah Asli.",
+      "8. Ra sukun di akhir kata (waqaf) yang diikuti ya (huruf lin).",
+      "RA JAIZ (Boleh Tebal/Tipis):",
+      "9. Ra sukun didahului kasrah, setelah Ra adalah huruf Isti'la (ص ض ط ظ غ خ ق).",
+      "10. Ra waqaf (akhir kata) didahului kasrah dan sesudahnya huruf isti'la."
     ],
     examples: [
-      {
-        title: "Ra Tafkhim (Tebal)",
-        arabic: "رَسُولُ اللَّهِ - رُزِقُوا",
-        highlight: "رَ",
-        explanation: "Huruf Ra berharakat fathah atau dhammah wajib dibaca tebal."
-      },
-      {
-        title: "Ra Tarqiq (Tipis)",
-        arabic: "رِزْقًا - فِرْعَوْنَ",
-        highlight: "رِ",
-        explanation: "Huruf Ra berharakat kasrah atau Ra mati didahului kasrah dibaca tipis."
-      }
+      { title: "Tafkhim – Ra Fathah (رَ)", arabic: "رَبِّ الْعَالَمِينَ", highlight: "رَبِّ", explanation: "Ra berharakat fathah wajib dibaca tebal." },
+      { title: "Tafkhim – Ra Fathah", arabic: "الرَّحْمَٰنِ", highlight: "الرَّ", explanation: "Ra bertasydid dengan fathah. Dibaca tebal." },
+      { title: "Tafkhim – Ra Dhammah (رُ)", arabic: "رُزِقُوا", highlight: "رُ", explanation: "Ra berharakat dhammah wajib dibaca tebal." },
+      { title: "Tafkhim – Ra Dhammah", arabic: "رُوحَنَا", highlight: "رُ", explanation: "Ra dhammah, dibaca tebal." },
+      { title: "Tafkhim – Ra Sukun, sebelumnya Fathah", arabic: "أَرْسَلَ", highlight: "أَرْ", explanation: "Ra sukun didahului Alif berharakat fathah. Dibaca tebal." },
+      { title: "Tafkhim – Ra Sukun, sebelumnya Dhammah", arabic: "بُرْهَانٌ", highlight: "بُرْ", explanation: "Ra sukun didahului huruf berharakat dhammah. Dibaca tebal." },
+      { title: "Tafkhim – Ra di awal kata", arabic: "رُّسُلٌ", highlight: "رُّ", explanation: "Ra di awal kata (ibtida') dengan harakat dhammah, dibaca tebal." },
+      { title: "Tarqiq – Ra Kasrah (رِ)", arabic: "رِزْقًا", highlight: "رِزْ", explanation: "Ra berharakat kasrah wajib dibaca tipis." },
+      { title: "Tarqiq – Ra Kasrah", arabic: "رِجَالٌ", highlight: "رِجَ", explanation: "Ra kasrah, dibaca tipis." },
+      { title: "Tarqiq – Ra Sukun, sebelumnya Kasrah Asli", arabic: "فِرْعَوْنَ", highlight: "فِرْ", explanation: "Ra sukun didahului huruf berharakat kasrah asli. Dibaca tipis." },
+      { title: "Tarqiq – Ra Sukun, didahului Kasrah", arabic: "مِرْيَةٌ", highlight: "مِرْ", explanation: "Ra mati, huruf sebelumnya kasrah. Dibaca tipis." },
+      { title: "Tarqiq – Ra Waqaf + Ya Lin", arabic: "خَيْرٌ ۝ (waqaf)", highlight: "يْرٌ", explanation: "Ra di akhir kata didahului Ya sukun (huruf lin). Dibaca tipis saat waqaf." },
+      { title: "Jaiz – Ra Sukun + Kasrah + Huruf Isti'la", arabic: "مِرْصَادٌ", highlight: "مِرْصَ", explanation: "Ra sukun didahului kasrah, sesudahnya Shad (huruf isti'la). Boleh tebal atau tipis." },
+      { title: "Jaiz – Ra Sukun + Kasrah + Isti'la", arabic: "إِرْصَادًا", highlight: "إِرْصَ", explanation: "Ra sukun setelah kasrah, sebelum huruf isti'la. Jaiz tafkhim atau tarqiq." }
     ]
   },
   {
-    id: "gharib",
-    title: "Ayat-Ayat Gharib",
-    description: "Bacaan-bacaan khusus yang tidak umum atau berbeda dari kaidah standar.",
-    longDescription: "Gharib berarti asing atau jarang. Dalam Al-Qur'an riwayat Hafs dari Ashim, terdapat beberapa kata yang cara membacanya keluar dari kaidah umum (pengecualian), seperti Saktah (berhenti tanpa napas), Imalah (bunyi 'e' seperti sate), dan Isymam.",
+    id: "lam_jalalah",
+    title: "Lam Jalalah",
+    icon: "لله",
+    description: "Hukum membaca lafaz Allah (اللَّه) tebal atau tipis berdasarkan harakat sebelumnya.",
+    longDescription: "Lam Jalalah adalah hukum khusus yang hanya berlaku pada lafaz Allah (اللَّه). Lam pada lafaz Allah dibaca tebal (Tafkhim) atau tipis (Tarqiq) tergantung harakat huruf sebelum Lam Jalalah tersebut.",
     materi: [
-      "1. **Imalah**: Memiringkan bunyi fathah ke arah kasrah (hanya pada 'Majreha' di QS Hud: 41).",
-      "2. **Isymam**: Isyarat mencucu bibir tanpa suara pada kata 'Laa Ta'mannaa'.",
-      "3. **Saktah**: Berhenti sejenak (2 harakat) tanpa mengambil napas.",
-      "4. **Tashil**: Membaca hamzah kedua dengan samar (antara hamzah dan alif)."
+      "1. Tafkhim (Tebal): Huruf sebelum Lam Jalalah berharakat Fathah atau Dhammah.",
+      "2. Tarqiq (Tipis): Huruf sebelum Lam Jalalah berharakat Kasrah."
     ],
     examples: [
-      {
-        title: "Imalah",
-        arabic: "بِسْمِ اللَّهِ مَجْر۪ىٰهَا",
-        highlight: "جْر۪ىٰ",
-        explanation: "Satu-satunya bacaan Imalah: harakat fathah miring ke kasrah (bunyi 're')."
-      },
-      {
-        title: "Saktah",
-        arabic: "كَلَّا ۖ بَلْ ۜ رَانَ",
-        highlight: "بَلْ ۜ ر",
-        explanation: "Berhenti sejenak tanpa mengambil napas antara kata 'Bal' dan 'Raana'."
-      }
-    ]
-  },
-  {
-    id: "qalqalah",
-    title: "Qalqalah",
-    description: "Memantulkan bunyi huruf Qalqalah (ق ط ب ج د) yang berharakat sukun atau waqaf.",
-    longDescription: "Qalqalah berarti getaran atau pantulan. Dalam tajwid, hukum ini berlaku ketika salah satu dari 5 huruf (Ba, Jim, Dal, Tha, Qaf - disingkat 'Baju Di Toko') berharakat sukun atau mati karena berhenti di akhir ayat. Ada dua jenis utama: Sughra (kecil/di tengah) dan Kubra (besar/di akhir).",
-    materi: [
-      "1. **Qalqalah Sughra**: Pantulan ringan pada huruf qalqalah yang mati di tengah kata.",
-      "2. **Qalqalah Kubra**: Pantulan kuat pada huruf qalqalah di akhir kata karena waqaf."
-    ],
-    examples: [
-      {
-        title: "Qalqalah Sughra",
-        arabic: "يَدْخُلُونَ",
-        highlight: "دْ",
-        explanation: "Huruf Dal mati di tengah kata. Dipantulkan dengan ringan."
-      },
-      {
-        title: "Qalqalah Kubra",
-        arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ",
-        highlight: "دٌ",
-        explanation: "Huruf Dal di akhir ayat (waqaf). Dipantulkan dengan kuat."
-      }
-    ]
-  },
-  {
-    id: "ghunnah",
-    title: "Ghunnah",
-    description: "Dengung yang keluar dari pangkal hidung (Al-Khaisyum) dengan panjang 2 harakat.",
-    longDescription: "Ghunnah adalah bunyi dengung yang berasal dari rongga hidung. Hukum ini wajib dibaca ketika kita menemukan huruf Nun atau Mim yang memiliki tanda Tasydid (tasydid). Panjang dengungnya adalah 2 harakat/ketukan.",
-    materi: [
-      "1. **Ghunnah Musyaddadah**: Pada Nun Tasydid (نّ) dan Mim Tasydid (مّ), wajib dengung.",
-      "2. **Ghunnah pada Idgham Bighunnah**: Nun sukun/tanwin masuk huruf ي ن م و disertai dengung."
-    ],
-    examples: [
-      {
-        title: "Ghunnah (Nun Tasydid)",
-        arabic: "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
-        highlight: "إِنَّ",
-        explanation: "Nun bertasydid dibaca mendengung jelas selama 2 harakat."
-      },
-      {
-        title: "Ghunnah (Mim Tasydid)",
-        arabic: "ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ",
-        highlight: "ثُمَّ",
-        explanation: "Mim bertasydid dibaca mendengung jelas selama 2 harakat."
-      }
-    ]
-  },
-  {
-    id: "lam_tarif",
-    title: "Lam Ta'rif (Alif Lam)",
-    description: "Hukum Alif Lam (ال) di awal kata.",
-    longDescription: "Lam Ta'rif adalah huruf Alif dan Lam yang masuk pada kata benda (Isim). Terbagi menjadi Al-Qamariyah (Lam dibaca jelas) dan Al-Syamsiyah (Lam melebur ke huruf berikutnya).",
-    materi: [
-      "1. **Lam Qamariyah**: Alif Lam bertemu huruf qamariyah, dibaca jelas. Huruf: ا ب ج ح خ ع غ ف ق ك م و ه ي.",
-      "2. **Lam Syamsiyah**: Alif Lam bertemu huruf syamsiyah, Lam masuk ke huruf berikutnya. Huruf: ت ث د ذ ر ز س ش ص ض ط ظ ل ن."
-    ],
-    examples: [
-      {
-        title: "Al-Qamariyah",
-        arabic: "الْحَمْدُ لِلَّهِ",
-        highlight: "الْحَ",
-        explanation: "Huruf Lam dibaca jelas (Sukun) karena bertemu huruf Ha."
-      },
-      {
-        title: "Al-Syamsiyah",
-        arabic: "الشَّمْسُ",
-        highlight: "الشَّ",
-        explanation: "Huruf Lam melebur ke huruf Syin yang bertasydid."
-      }
-    ]
-  }
-];
+      { title: "Tafkhim – sebelumnya Fathah", arabic: "رَسُولُ اللَّهِ", highlight: "لُ اللَّه", explanation: "Huruf sebelum Allah berharakat dhammah. Lam Jalalah dibaca tebal." },
+      { title: "Tafkhim – sebelumnya Fathah", arabic: "شَهِدَ اللَّهُ", highlight: "دَ اللَّه", explanation: "Huruf sebelum Allah berharakat fathah. Dibaca tebal." },
+
 
 const questions = [
 
