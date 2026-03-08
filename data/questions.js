@@ -2143,6 +2143,24 @@ const questions = [
     }
   },
 
+  // --- 4.3 Qalqalah Akbar ---
+  {
+    id: 107,
+    type: "ayat",
+    category: "qalqalah",
+    subtopic: "qalqalah_akbar",
+    question: "Huruf Qalqalah bertasydid di akhir kata saat diwaqafkan menghasilkan pantulan terkuat. Ini disebut?",
+    arabic: "الْحَقُّ",
+    options: ["Qalqalah Sughra", "Qalqalah Kubra", "Qalqalah Akbar", "Izhar"],
+    answer: 2,
+    explanation: {
+      title: "Qalqalah Akbar",
+      text: "Qaf (ق) bertasydid di akhir kata 'Al-Haqq'. Saat diwaqafkan, huruf qalqalah yang bertasydid menghasilkan pantulan terkuat karena ada penekanan tasydid sebelum waqaf. Ini disebut Qalqalah Akbar.",
+      example: "الْحَقُّ (waqaf)",
+      highlight: "قُّ → قْ"
+    }
+  },
+
   // ============================================================
   // 5. GHUNNAH
   // ============================================================
@@ -2328,6 +2346,52 @@ const questions = [
       text: "Ketika Nun/Tanwin berubah jadi Mim (iqlab), Mim itu sendiri membawa sifat ghunnah. Sehingga selalu ada dengung saat Iqlab.",
       example: "مِنۢ بَعْدِ",
       highlight: "نۢ بَ"
+    }
+  },
+
+  // --- 5.5 Ghunnah pada Ikhfa Syafawi ---
+  {
+    id: 108,
+    type: "ayat",
+    category: "ghunnah",
+    subtopic: "ghunnah_ikhfa_syafawi",
+    question: "Saat Mim sukun bertemu Ba, apakah terdapat ghunnah?",
+    arabic: "تَرْمِيهِم بِحِجَارَةٍ",
+    options: [
+      "Tidak ada ghunnah, hanya Mim disamarkan",
+      "Ada ghunnah dari hidung disertai bunyi Mim yang samar",
+      "Ghunnah kuat seperti Nun tasydid",
+      "Tidak terdengar ghunnah sama sekali"
+    ],
+    answer: 1,
+    explanation: {
+      title: "Ghunnah pada Ikhfa Syafawi",
+      text: "Mim sukun bertemu Ba (ب) = Ikhfa Syafawi. Bibir tidak menutup rapat, bunyi Mim samar disertai dengung (ghunnah) 2 harakat dari hidung dan bibir. Ghunnah pada Ikhfa Syafawi lebih ringan dari Ghunnah Musyaddadah.",
+      example: "تَرْمِيهِم بِحِجَارَةٍ",
+      highlight: "مْ بِ"
+    }
+  },
+
+  // --- 5.6 Ghunnah pada Idgham Mimi ---
+  {
+    id: 109,
+    type: "ayat",
+    category: "ghunnah",
+    subtopic: "ghunnah_idgham_mimi",
+    question: "Mim sukun bertemu Mim menghasilkan Idgham Mimi. Apakah disertai ghunnah?",
+    arabic: "لَكُم مَّا كَسَبْتُمْ",
+    options: [
+      "Tidak ada ghunnah, Mim langsung digabung",
+      "Ghunnah hanya jika bertemu Ba",
+      "Ada ghunnah (dengung) 2 harakat karena Mim melebur ke Mim",
+      "Ghunnah hanya untuk Nun bertasydid"
+    ],
+    answer: 2,
+    explanation: {
+      title: "Ghunnah pada Idgham Mimi",
+      text: "Mim sukun bertemu Mim (م) = Idgham Mimi (Mutamatsilain). Mim pertama melebur ke Mim kedua disertai dengung (ghunnah) 2 harakat dari hidung. Ghunnah adalah sifat wajib Mim.",
+      example: "لَكُم مَّا كَسَبْتُمْ",
+      highlight: "مْ مَّ"
     }
   },
 
@@ -3073,13 +3137,13 @@ const questions = [
 // SUMMARY
 // ============================================================
 /*
- Total soal: 106 soal
+ Total soal: 109 soal
  Distribusi:
  - Nun Sukun & Tanwin: 14 soal (Izhar 3, Idgham Bighunnah 3, Idgham Bilaghunnah 2, Iqlab 3, Ikhfa 3)
  - Mim Sukun: 7 soal (Izhar Syafawi 3, Ikhfa Syafawi 2, Idgham Mimi 2)
  - Mad: 32 soal (semua 15 subtopik tercakup)
- - Qalqalah: 6 soal (Sughra 3, Kubra 3)
- - Ghunnah: 9 soal (4 subtopik)
+ - Qalqalah: 7 soal (Sughra 3, Kubra 3, Akbar 1)
+ - Ghunnah: 12 soal (Musyaddadah 3, Idgham Bighunnah 2, Ikhfa Haqiqi 2, Iqlab 2, Ikhfa Syafawi 1, Idgham Mimi 1)
  - Lam Ta'rif: 6 soal (Qamariyah 3, Syamsiyah 3)
  - Ra: 7 soal (Tafkhim 3, Tarqiq 2, Jaiz 2)
  - Gharib: 23 soal (semua 9 subtopik tercakup)

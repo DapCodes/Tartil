@@ -2816,3 +2816,326 @@ html.dark-mode .action-link {
 html.dark-mode .action-divider {
   color: var(--text-muted);
 }
+
+/* ═══════════════════════════════════════
+   RIWAYAT TEST
+   ═══════════════════════════════════════ */
+
+/* Filter Navigation */
+.history-filter-nav {
+  background: var(--card);
+  border-bottom: 1px solid rgba(27, 67, 50, 0.08);
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.history-filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.history-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border: 1.5px solid rgba(27, 67, 50, 0.12);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.history-filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  background: rgba(212, 175, 55, 0.06);
+}
+
+.history-filter-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  border-color: var(--primary);
+  box-shadow: 0 2px 12px rgba(27, 67, 50, 0.2);
+}
+
+.history-filter-btn.active svg {
+  color: white;
+}
+
+/* History Cards */
+.history-card {
+  background: var(--card);
+  border: 1px solid rgba(27, 67, 50, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  margin-bottom: 0.85rem;
+  box-shadow: 0 2px 8px rgba(27, 67, 50, 0.04);
+  transition: all var(--transition);
+  animation: fadeInUp 0.35s ease-out both;
+}
+
+.history-card:hover {
+  box-shadow: var(--card-shadow);
+  transform: translateY(-2px);
+  border-color: rgba(27, 67, 50, 0.12);
+}
+
+.history-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.history-card-score {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+}
+
+.history-score-num {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.history-score-divider {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.4;
+  margin: 0 0.1rem;
+}
+
+.history-score-total {
+  font-size: 1.1rem;
+  font-weight: 600;
+  opacity: 0.5;
+}
+
+.history-card-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.3rem 0.75rem;
+  border-radius: 50px;
+}
+
+/* Grade Colors */
+.history-grade-gold .history-score-num {
+  color: var(--accent-dark);
+}
+
+.history-grade-green .history-score-num {
+  color: var(--correct);
+}
+
+.history-grade-yellow .history-score-num {
+  color: #e6a817;
+}
+
+.history-grade-red .history-score-num {
+  color: var(--wrong);
+}
+
+.history-card-badge.history-grade-gold {
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--accent-dark);
+}
+
+.history-card-badge.history-grade-green {
+  background: var(--correct-bg);
+  color: var(--correct);
+}
+
+.history-card-badge.history-grade-yellow {
+  background: rgba(230, 168, 23, 0.1);
+  color: #b8860b;
+}
+
+.history-card-badge.history-grade-red {
+  background: var(--wrong-bg);
+  color: var(--wrong);
+}
+
+/* Percentage Bar */
+.history-card-percentage {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.history-percentage-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(27, 67, 50, 0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.history-percentage-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+.history-percentage-fill.history-grade-gold {
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+}
+
+.history-percentage-fill.history-grade-green {
+  background: linear-gradient(90deg, var(--correct), #4ade80);
+}
+
+.history-percentage-fill.history-grade-yellow {
+  background: linear-gradient(90deg, #e6a817, #fbbf24);
+}
+
+.history-percentage-fill.history-grade-red {
+  background: linear-gradient(90deg, var(--wrong), #f87171);
+}
+
+.history-percentage-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  min-width: 36px;
+  text-align: right;
+}
+
+/* Detail Row */
+.history-card-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.history-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.history-detail svg {
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+/* Empty State */
+.history-empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.history-empty-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background: rgba(27, 67, 50, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.history-empty h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.history-empty p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 320px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Clear Section */
+.history-clear-section {
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(27, 67, 50, 0.06);
+}
+
+.history-clear-btn {
+  font-size: 0.82rem;
+  color: var(--wrong);
+  border-color: rgba(239, 68, 68, 0.15);
+  gap: 0.4rem;
+}
+
+.history-clear-btn:hover {
+  background: var(--wrong-bg);
+  border-color: var(--wrong);
+}
+
+/* Dark Mode — History */
+html.dark .history-filter-nav {
+  background: var(--card);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+html.dark .history-filter-btn {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+}
+
+html.dark .history-filter-btn:hover {
+  background: rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.2);
+}
+
+html.dark .history-card {
+  background: var(--card);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+html.dark .history-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+html.dark .history-percentage-bar {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+html.dark .history-empty-icon {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+html.dark .history-clear-section {
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .history-score-num {
+    font-size: 1.5rem;
+  }
+
+  .history-card-details {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .history-card:hover {
+    transform: translateY(-3px);
+  }
+}

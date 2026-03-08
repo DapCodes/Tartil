@@ -370,6 +370,36 @@
     localStorage.setItem('tartil_date', dateStr);
     localStorage.setItem('tartilScore', score.toString());
 
+    // Save to quiz history
+    const selectedChaptersRaw = localStorage.getItem('tartil_selected_chapters');
+    let chapterNames = 'Semua Bab';
+    if (currentChapter) {
+      const ch = chapters.find(c => c.id === currentChapter);
+      chapterNames = ch ? ch.title : currentChapter;
+    } else if (selectedChaptersRaw) {
+      try {
+        const selChaps = JSON.parse(selectedChaptersRaw);
+        chapterNames = selChaps.map(id => {
+          const ch = chapters.find(c => c.id === id);
+          return ch ? ch.title : id;
+        }).join(', ');
+      } catch(e) { /* fallback */ }
+    }
+
+    const historyEntry = {
+      id: Date.now(),
+      score: score,
+      total: activeQuestions.length,
+      time: totalSeconds,
+      date: dateStr,
+      timestamp: Date.now(),
+      chapters: chapterNames,
+      percentage: Math.round((score / activeQuestions.length) * 100)
+    };
+    const historyArr = JSON.parse(localStorage.getItem('tartil_history') || '[]');
+    historyArr.push(historyEntry);
+    localStorage.setItem('tartil_history', JSON.stringify(historyArr));
+
     // Clean up session persistence
     const keysToRemove = [
       'tartil_active_questions_ids', 'tartil_shuffled_map', 
