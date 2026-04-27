@@ -116,6 +116,9 @@
     // Build example cards HTML
     let examplesHtml = '';
     if (chapter.examples && chapter.examples.length > 0) {
+      const initialLimit = 4;
+      const hasMore = chapter.examples.length > initialLimit;
+      
       examplesHtml = `
         <div class="exp-section">
           <div class="exp-section-label">
@@ -124,15 +127,22 @@
             </svg>
             Contoh & Penjelasan Lengkap
           </div>
-          <div class="exp-examples-grid">
-            ${chapter.examples.map(ex => `
-              <div class="exp-example-card">
+          <div class="exp-examples-grid" id="examplesGrid">
+            ${chapter.examples.map((ex, exIdx) => `
+              <div class="exp-example-card" style="${exIdx >= initialLimit ? 'display: none;' : ''}">
                 <div class="exp-example-arabic" dir="rtl">${buildHighlightedArabic(ex.arabic, ex.highlight)}</div>
                 <div class="exp-example-title">${ex.title}</div>
                 <div class="exp-example-desc">${ex.explanation}</div>
               </div>
             `).join('')}
           </div>
+          ${hasMore ? `
+            <div class="exp-show-more-area" style="margin-top: 1rem;">
+              <button class="btn btn-outline btn-block" id="showMoreBtn">
+                Lihat Selengkapnya (+${chapter.examples.length - initialLimit} contoh)
+              </button>
+            </div>
+          ` : ''}
         </div>
       `;
     }
@@ -237,6 +247,17 @@
         sessionStorage.setItem('tartil_quiz_active', 'true');
         
         window.location.href = `quiz.html?chapter=${chapter.id}`;
+      });
+    }
+
+    // Show More Examples logic
+    const showMoreBtn = document.getElementById('showMoreBtn');
+    if (showMoreBtn) {
+      showMoreBtn.addEventListener('click', () => {
+        const grid = document.getElementById('examplesGrid');
+        const cards = grid.querySelectorAll('.exp-example-card');
+        cards.forEach(card => card.style.display = 'block');
+        showMoreBtn.parentElement.style.display = 'none';
       });
     }
 
