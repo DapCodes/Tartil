@@ -219,6 +219,27 @@
       </div>
     `;
 
+    // CTA: Learn This Chapter
+    const startBtn = document.getElementById('startQuizBtn');
+    if (startBtn) {
+      startBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Clear any existing active session to ensure a fresh start
+        const keysToRemove = [
+          'tartil_active_questions_ids', 'tartil_shuffled_map', 
+          'tartil_current_index', 'tartil_answers_progress', 
+          'tartil_start_time', 'tartil_selected_chapters'
+        ];
+        keysToRemove.forEach(k => localStorage.removeItem(k));
+        
+        // Set session flag to allow persistence on refresh within this session
+        sessionStorage.setItem('tartil_quiz_active', 'true');
+        
+        window.location.href = `quiz.html?chapter=${chapter.id}`;
+      });
+    }
+
     // Bind prev/next buttons
     const prevBtn = document.getElementById('prevChapterBtn');
     const nextBtn = document.getElementById('nextChapterBtn');

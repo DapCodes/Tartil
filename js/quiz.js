@@ -158,10 +158,10 @@
     if (currentChapter) {
       activeQuestions = questions.filter(q => q.category === currentChapter);
       if (activeQuestions.length === 0) {
-        activeQuestions = questions.slice();
+        activeQuestions = questions.slice().slice(0, 20);
         currentChapter = null;
       }
-      activeQuestions = shuffleArray(activeQuestions);
+      activeQuestions = shuffleArray(activeQuestions).slice(0, 20);
     } else if (selectedChapters.length > 0) {
       const chapterQuestionsMap = {};
       selectedChapters.forEach(chId => {
