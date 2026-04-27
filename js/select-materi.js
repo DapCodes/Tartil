@@ -100,6 +100,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (selectedChapters.length > 0) {
       // Save selected chapters to localStorage
       localStorage.setItem('tartil_selected_chapters', JSON.stringify(selectedChapters));
+      
+      // Clear any existing active session to ensure a fresh start
+      localStorage.removeItem('tartil_active_questions_ids');
+      localStorage.removeItem('tartil_shuffled_map');
+      localStorage.removeItem('tartil_current_index');
+      localStorage.removeItem('tartil_answers_progress');
+      localStorage.removeItem('tartil_start_time');
+      
+      // Set session flag to allow persistence on refresh within this session
+      sessionStorage.setItem('tartil_quiz_active', 'true');
+      
       window.location.href = 'quiz.html';
     }
   });

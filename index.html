@@ -184,6 +184,9 @@
 
     // Check for previous score
     document.addEventListener('DOMContentLoaded', () => {
+      // Clear active quiz session when returning home
+      sessionStorage.removeItem('tartil_quiz_active');
+
       const score = localStorage.getItem('tartilScore');
       if (score !== null) {
         const banner = document.getElementById('scoreBanner');

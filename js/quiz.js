@@ -16,6 +16,7 @@
   let isRevealed = [];
   let shuffledOptionsMap = []; // Stores shuffled option data per question
   let currentChapter = null;   // Active chapter filter (null = all)
+  let isQuizFinished = false;  // Flag to prevent beforeunload prompt after finishing
 
   // ═══ DOM Elements ═══
   const arabicDisplay = document.getElementById('arabicDisplay');
@@ -46,6 +47,9 @@
 
   // ═══ Initialize ═══
   function init() {
+    // Check if we are in an active session (persists through refresh, but cleared when exiting/closing tab)
+    const isSessionActive = sessionStorage.getItem('tartil_quiz_active') === 'true';
+    
     // Check for existing active session in localStorage
     const savedActiveQuestions = localStorage.getItem('tartil_active_questions_ids');
     const savedShuffledMap = localStorage.getItem('tartil_shuffled_map');
@@ -53,86 +57,29 @@
     const savedAnswers = localStorage.getItem('tartil_answers_progress');
     const savedStartTime = localStorage.getItem('tartil_start_time');
 
-    if (savedActiveQuestions && savedShuffledMap) {
+    if (isSessionActive && savedActiveQuestions && savedShuffledMap) {
       // Restore session
       const qIds = JSON.parse(savedActiveQuestions);
-      activeQuestions = qIds.map(id => questions.find(q => q.id === id));
-      shuffledOptionsMap = JSON.parse(savedShuffledMap);
-      currentIndex = savedIndex ? parseInt(savedIndex, 10) : 0;
-      userAnswers = savedAnswers ? JSON.parse(savedAnswers) : new Array(activeQuestions.length).fill(null);
-      isRevealed = userAnswers.map(ans => ans !== null);
-      startTime = savedStartTime ? parseInt(savedStartTime, 10) : Date.now();
+      activeQuestions = qIds.map(id => questions.find(q => q.id === id)).filter(q => q !== undefined);
       
-      const savedChapterId = localStorage.getItem('tartil_chapter');
-      currentChapter = savedChapterId || null;
-    } else {
-      // Create new session
-      localStorage.removeItem('tartil_answers');
-      localStorage.removeItem('tartil_score');
-      localStorage.removeItem('tartil_time');
-      localStorage.removeItem('tartil_date');
-
-      const savedChapters = localStorage.getItem('tartil_selected_chapters');
-      let selectedChapters = [];
-      if (savedChapters) {
-        try {
-          selectedChapters = JSON.parse(savedChapters);
-        } catch (e) {
-          console.error("Error parsing selected chapters", e);
-        }
-      }
-
-      const urlParams = new URLSearchParams(window.location.search);
-      currentChapter = urlParams.get('chapter');
-
-      if (currentChapter) {
-        activeQuestions = questions.filter(q => q.category === currentChapter);
-        if (activeQuestions.length === 0) {
-          activeQuestions = questions.slice();
-          currentChapter = null;
-        }
-        activeQuestions = shuffleArray(activeQuestions);
-      } else if (selectedChapters.length > 0) {
-        const chapterQuestionsMap = {};
-        selectedChapters.forEach(chId => {
-          chapterQuestionsMap[chId] = shuffleArray(questions.filter(q => q.category === chId));
-        });
-
-        const totalQuestionsLimit = 20;
-        let activeQuestionsPool = [];
-        let addedInRound = 0;
-        
-        do {
-          addedInRound = 0;
-          for (let i = 0; i < selectedChapters.length; i++) {
-            if (activeQuestionsPool.length >= totalQuestionsLimit) break;
-            const chId = selectedChapters[i];
-            const chQuestions = chapterQuestionsMap[chId];
-            if (chQuestions && chQuestions.length > 0) {
-              activeQuestionsPool.push(chQuestions.shift());
-              addedInRound++;
-            }
-          }
-        } while (addedInRound > 0 && activeQuestionsPool.length < totalQuestionsLimit);
-
-        activeQuestions = shuffleArray(activeQuestionsPool);
+      // If questions weren't found (e.g. data changed), fall back to new session
+      if (activeQuestions.length === 0) {
+        startNewSession();
       } else {
-        activeQuestions = shuffleArray(questions.slice());
+        shuffledOptionsMap = JSON.parse(savedShuffledMap);
+        currentIndex = savedIndex ? parseInt(savedIndex, 10) : 0;
+        userAnswers = savedAnswers ? JSON.parse(savedAnswers) : new Array(activeQuestions.length).fill(null);
+        isRevealed = userAnswers.map(ans => ans !== null);
+        startTime = savedStartTime ? parseInt(savedStartTime, 10) : Date.now();
+        
+        const savedChapterId = localStorage.getItem('tartil_chapter');
+        currentChapter = savedChapterId || null;
       }
-
-      shuffledOptionsMap = activeQuestions.map(q => createShuffledOptions(q));
-      currentIndex = 0;
-      userAnswers = new Array(activeQuestions.length).fill(null);
-      isRevealed = new Array(activeQuestions.length).fill(false);
-      startTime = Date.now();
-
-      // Save initial session
-      localStorage.setItem('tartil_active_questions_ids', JSON.stringify(activeQuestions.map(q => q.id)));
-      localStorage.setItem('tartil_shuffled_map', JSON.stringify(shuffledOptionsMap));
-      localStorage.setItem('tartil_start_time', startTime.toString());
-      if (currentChapter) localStorage.setItem('tartil_chapter', currentChapter);
+    } else {
+      startNewSession();
     }
 
+    // common setup after restoration or new session
     if (currentChapter) {
       const ch = chapters.find(c => c.id === currentChapter);
       if (ch) {
@@ -147,6 +94,113 @@
     prevBtn.addEventListener('click', prevQuestion);
     nextBtn.addEventListener('click', nextQuestion);
     document.addEventListener('keydown', handleKeyboard);
+
+    const backBtn = document.getElementById('backBtn');
+    if (backBtn) {
+      backBtn.addEventListener('click', handleBackNavigation);
+    }
+    
+    window.addEventListener('beforeunload', handleBeforeUnload);
+  }
+
+  function handleBackNavigation(e) {
+    e.preventDefault();
+    const confirmLeave = confirm("Progres kuis Anda belum selesai dan tidak akan disimpan. Apakah Anda yakin ingin keluar?");
+    if (confirmLeave) {
+      // Clear storage
+      const keysToRemove = [
+        'tartil_active_questions_ids', 'tartil_shuffled_map', 
+        'tartil_current_index', 'tartil_answers_progress', 
+        'tartil_start_time', 'tartil_selected_chapters'
+      ];
+      keysToRemove.forEach(k => localStorage.removeItem(k));
+      sessionStorage.removeItem('tartil_quiz_active');
+      
+      window.location.href = 'index.html';
+    }
+  }
+
+  function handleBeforeUnload(e) {
+    if (!isQuizFinished) {
+      e.preventDefault();
+      e.returnValue = ''; 
+      return '';
+    }
+  }
+
+  function startNewSession() {
+    // Ensure we mark the session as active if it wasn't already
+    sessionStorage.setItem('tartil_quiz_active', 'true');
+
+    // Create new session
+    localStorage.removeItem('tartil_answers');
+    localStorage.removeItem('tartil_score');
+    localStorage.removeItem('tartil_time');
+    localStorage.removeItem('tartil_date');
+    localStorage.removeItem('tartil_active_questions_ids');
+    localStorage.removeItem('tartil_shuffled_map');
+    localStorage.removeItem('tartil_current_index');
+    localStorage.removeItem('tartil_answers_progress');
+
+    const savedChapters = localStorage.getItem('tartil_selected_chapters');
+    let selectedChapters = [];
+    if (savedChapters) {
+      try {
+        selectedChapters = JSON.parse(savedChapters);
+      } catch (e) {
+        console.error("Error parsing selected chapters", e);
+      }
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    currentChapter = urlParams.get('chapter');
+
+    if (currentChapter) {
+      activeQuestions = questions.filter(q => q.category === currentChapter);
+      if (activeQuestions.length === 0) {
+        activeQuestions = questions.slice();
+        currentChapter = null;
+      }
+      activeQuestions = shuffleArray(activeQuestions);
+    } else if (selectedChapters.length > 0) {
+      const chapterQuestionsMap = {};
+      selectedChapters.forEach(chId => {
+        chapterQuestionsMap[chId] = shuffleArray(questions.filter(q => q.category === chId));
+      });
+
+      const totalQuestionsLimit = 20;
+      let activeQuestionsPool = [];
+      let addedInRound = 0;
+      
+      do {
+        addedInRound = 0;
+        for (let i = 0; i < selectedChapters.length; i++) {
+          if (activeQuestionsPool.length >= totalQuestionsLimit) break;
+          const chId = selectedChapters[i];
+          const chQuestions = chapterQuestionsMap[chId];
+          if (chQuestions && chQuestions.length > 0) {
+            activeQuestionsPool.push(chQuestions.shift());
+            addedInRound++;
+          }
+        }
+      } while (addedInRound > 0 && activeQuestionsPool.length < totalQuestionsLimit);
+
+      activeQuestions = shuffleArray(activeQuestionsPool);
+    } else {
+      activeQuestions = shuffleArray(questions.slice().slice(0, 20)); // Limit to 20 even if no selection
+    }
+
+    shuffledOptionsMap = activeQuestions.map(q => createShuffledOptions(q));
+    currentIndex = 0;
+    userAnswers = new Array(activeQuestions.length).fill(null);
+    isRevealed = new Array(activeQuestions.length).fill(false);
+    startTime = Date.now();
+
+    // Save initial session
+    localStorage.setItem('tartil_active_questions_ids', JSON.stringify(activeQuestions.map(q => q.id)));
+    localStorage.setItem('tartil_shuffled_map', JSON.stringify(shuffledOptionsMap));
+    localStorage.setItem('tartil_start_time', startTime.toString());
+    if (currentChapter) localStorage.setItem('tartil_chapter', currentChapter);
   }
 
   function createShuffledOptions(q) {
@@ -348,6 +402,7 @@
   }
 
   function finishQuiz() {
+    isQuizFinished = true;
     stopTimer();
     let score = 0;
     const originalAnswers = [];
