@@ -85,7 +85,13 @@ Jika Anda ingin mendeploy sendiri ke Vercel:
 
 ## Kontribusi
 
-Dibuat dengan dedikasi oleh **Siswa RPL SMK Assalaam Bandung**. Aplikasi ini dikembangkan sebagai sarana belajar dan berbagi pengetahuan tentang tajwid Al-Qur'an.
+Dibuat dengan dedikasi oleh **Daffa Ramadhan Maulana** (Siswa RPL SMK Assalaam Bandung). Aplikasi ini dikembangkan sebagai sarana belajar dan berbagi pengetahuan tentang tajwid Al-Qur'an.
+
+---
+
+## Lisensi
+
+Proyek ini dilisensikan di bawah [MIT License](LICENSE) - lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
 
 ---
 
